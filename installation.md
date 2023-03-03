@@ -54,7 +54,7 @@ sudo isenkram-autoinstall-firmware
   - are present in /etc/apt/sources.list installation source distro
 ```bash
 sudo apt-get update
-sudo apt-get install nvidia-driver firmware-misc-nonfree
+sudo apt-get install nvidia-detect inxi linux-image-amd64 nvidia-driver firmware-misc-nonfree
 ```
 # System state - disable all but hibernate
 ```bash
@@ -62,7 +62,8 @@ sudo systemctl mask sleep.target suspend.target hybrid-sleep.target
 ```
 # System state - disable all
 ```bash
-sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
+# keep hibernate.target
+sudo systemctl mask sleep.target suspend.target  hybrid-sleep.target
 ```
 
 # Bluetooth
@@ -71,15 +72,15 @@ sudo apt-get install bluez bluetooth
 ```
 # Sensors
 ```bash
-sudo apt-get install hddtemp lm-sensors psensor
+sudo apt-get install lm-sensors psensor
 ```
 # C/C++ and some dependencies to rest
 ```bash
-sudo apt-get install make gcc tcl libssl-dev libsystemd-dev libc6 libgcc1 libgssapi-krb5-2 libicu67 libssl1.1 libstdc++6 zlib1g ca-certificates apt-transport-https
+sudo apt-get install make gcc tcl libssl-dev libsystemd-dev libc6 libgcc-s1 libstdc++6 zlib1g ca-certificates apt-transport-https
 ```
 # Keyring
 ```bash
-gnome-keyring libqt5keychain1
+sudo apt-get install gnome-keyring libqt5keychain1
 ```
 
 # Rust
@@ -93,7 +94,8 @@ Installed in home/path (backup), just recreate symlink dotnet -> dotnetX
 
 # Python
 ```bash
-sudo apt-get autoremove python2
+# not found in bookworm anymore
+# sudo apt-get autoremove python2
 ```
 
 ```bash
