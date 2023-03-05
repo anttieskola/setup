@@ -12,6 +12,9 @@ This repository contains notes on my personal server/workstation/rasbpi/... inst
 # Desktop environments
 - [kde](/kde.md)
 
+# Advanced
+- [python](/python.md)
+
 # Software
 - TODO: [firewall](/firewall.md)
 - TODO: [postgresql](/postgresql.md)

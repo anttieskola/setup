@@ -1,5 +1,6 @@
 # DistroHop / Fresh install
 Notes for myself when installing or updating some nix box.
+Current environment bookworm beta2.
 
 ## General
 - Use LVM if unsure on sizes
@@ -42,20 +43,83 @@ Should have
 - id: 1000
 - gid: 1000
 
-# AMD Firmware
+# Login/Boot method
+Console login
+```bash
+sudo systemctl set-default multi-user.target
+sudo systemctl reboot
+```
+
+Graphical login
+```bash
+sudo systemctl set-default graphical.target
+sudo systemctl reboot
+```
+
+# Basic stuuf
+```bash
+sudo apt install git make gcc tcl libssl-dev libsystemd-dev libc6 libgcc-s1 libstdc++6 zlib1g ca-certificates apt-transport-https libfreeimage3 libfreeimage-dev
+```
+
+# AMD
 - use isenkram to install any missing firmware
 ```bash
-sudo apt-get install isenkram
+sudo apt install isenkram
 sudo isenkram-autoinstall-firmware
 ```
 
-# Nvidia driver
-1. add/check: contrib non-free
-  - are present in /etc/apt/sources.list installation source distro
+# Nvidia
+Helper tools
 ```bash
-sudo apt-get update
-sudo apt-get install nvidia-detect inxi linux-image-amd64 nvidia-driver firmware-misc-nonfree
+sudo apt install nvidia-detect inxi
 ```
+
+Driver is easiest to install from debian repo, just add/check: contrib non-free are present in /etc/apt/sources.list installation source distro
+
+```bash
+sudo apt update
+sudo apt install linux-image-amd64 nvidia-driver firmware-misc-nonfree
+```
+
+Harder way is from downloading from NVidia directly, it worked out of the box
+in bullseye but not in bookworm.
+
+```bash
+sudo apt install build-essential libglvnd-dev pkg-config 
+sudo apt install linux-image-amd64 linux-source linux-headers-X.X.X
+sudo ./NVidi....
+```
+
+It nvidia-smi works then good to go.
+(Remember CUDA version is just what the driver supports)
+
+## Cuda & cuDNN
+(This requires developer account)
+- [Cuda toolkit](https://developer.nvidia.com/cuda-toolkit-archive)
+- [Cudnn](https://developer.nvidia.com/cudnn)
+  - [Nvidia instructions](https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html)
+
+Using 11.8 at the moment (pytorch)
+
+```bash
+sudo dpkg -i cuda-repo-debian11-11-8-local_11.8.0-520.61.05-1_amd64.deb
+sudo cp /var/cuda-repo-debian11-11-8-local/cuda-*-keyring.gpg /usr/share/keyrings/
+
+sudo dpkg -i cudnn-local-repo-debian11-8.8.0.121_1.0-1_amd64.deb
+sudo cp /var/cudnn-local-repo-debian11-8.8.0.121/cudnn-local-*-keyring.gpg /usr/share/keyrings/
+
+sudo apt update
+
+sudo apt install cuda libcudnn8 libcudnn8-dev libcudnn8-samples
+
+# Run the sample to verify all works
+```
+
+## TensorRT
+Someday maybe when can fullfill its python dependency, which is odd as I can have conda environent different python, think I just don't understand how to use this...
+- [TensorRT](https://docs.nvidia.com/deeplearning/tensorrt/archives/index.html#trt_7)
+
+
 # System state - disable all but hibernate
 ```bash
 sudo systemctl mask sleep.target suspend.target hybrid-sleep.target
@@ -68,19 +132,16 @@ sudo systemctl mask sleep.target suspend.target  hybrid-sleep.target
 
 # Bluetooth
 ```bash
-sudo apt-get install bluez bluetooth
+sudo apt install bluez bluetooth
 ```
 # Sensors
 ```bash
-sudo apt-get install lm-sensors psensor
+sudo apt install lm-sensors psensor
 ```
-# C/C++ and some dependencies to rest
-```bash
-sudo apt-get install make gcc tcl libssl-dev libsystemd-dev libc6 libgcc-s1 libstdc++6 zlib1g ca-certificates apt-transport-https
-```
+
 # Keyring
 ```bash
-sudo apt-get install gnome-keyring libqt5keychain1
+sudo apt install gnome-keyring libqt5keychain1
 ```
 
 # Rust
@@ -95,11 +156,12 @@ Installed in home/path (backup), just recreate symlink dotnet -> dotnetX
 # Python
 ```bash
 # not found in bookworm anymore
-# sudo apt-get autoremove python2
+# sudo apt autoremove python2
 ```
 
 ```bash
-sudo apt-get install python3 python3-pip
+sudo apt install python3 python3-pip
+sudo apt install python3-numpy python3-torch
 ```
 
 # Bitwarden
@@ -122,10 +184,10 @@ sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/usr/share/keyrings/micr
 ```
 Install either
 ```bash
-sudo apt-get install code
+sudo apt install code
 ```
 ```bash
-sudo apt-get install code-insiders
+sudo apt install code-insiders
 ```
 
 ## Edge
@@ -137,10 +199,10 @@ sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] h
 Beta updates every 4 weeks, dev every week.
 Install either
 ```bash
-sudo apt-get install microsoft-edge-beta
+sudo apt install microsoft-edge-beta
 ```
 ```bash
-sudo apt-get install microsoft-edge-dev
+sudo apt install microsoft-edge-dev
 ```
 # Steam
 Has lot's of dependencies which be installed in progress, especially if no gnome installed from distro, but still there will be packages for sure.
@@ -148,7 +210,10 @@ Has lot's of dependencies which be installed in progress, especially if no gnome
 Download: https://store.steampowered.com/about/download
 
 ```bash
-dpkg -i steam_latest.deb
+sudo dpkg --add-architecture i386
+sudo apt install libgl1:i386 libgl1-mesa-dri:i386
+sudo dpkg -i steam_latest.deb
+sudo apt install steam
 ```
 
 # Spotify
@@ -165,5 +230,5 @@ echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sou
 ```
 
 ```bash
-sudo apt-get install spotify-client
+sudo apt install spotify-client
 ```
