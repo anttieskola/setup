@@ -210,10 +210,18 @@ Has lot's of dependencies which be installed in progress, especially if no gnome
 Download: https://store.steampowered.com/about/download
 
 ```bash
+# steam requires 32-bit libraries
 sudo dpkg --add-architecture i386
-sudo apt install libgl1:i386 libgl1-mesa-dri:i386
+# it should not remove any existing ones...
 sudo dpkg -i steam_latest.deb
-sudo apt install steam
+sudo apt --fix-broken install
+# run steam from cmd line should run steamdeps with sudo
+# for some reason the dependant packages want to uninstall
+# my installed cuda libraries...
+# so one post in SO says if you install it using the installer
+# instead .deb package it should work...
+# guess i could try, just uninstall them and try installing
+# using installer...
 ```
 
 # Spotify
