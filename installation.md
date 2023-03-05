@@ -68,7 +68,7 @@ sudo apt install isenkram
 sudo isenkram-autoinstall-firmware
 ```
 
-# Nvidia
+# Nvidia driver only (rest after steam)
 Helper tools
 ```bash
 sudo apt install nvidia-detect inxi
@@ -93,8 +93,31 @@ sudo ./NVidi....
 It nvidia-smi works then good to go.
 (Remember CUDA version is just what the driver supports)
 
-## Cuda & cuDNN
-(This requires developer account)
+# Steam
+Has lot's of dependencies which be installed in progress, especially if no gnome installed from distro, but still there will be packages for sure.
+
+```bash
+# steam requires 32-bit libraries
+sudo dpkg --add-architecture i386
+
+# install some steam dependencies first
+sudo apt install gcc-12-base:i386 i965-va-driver:i386 intel-media-va-driver:i386 libaom3:i386 libasound2:i386 libasound2-plugins:i386 libasyncns0:i386 libatomic1:i386 libavcodec59:i386 libavutil57:i386 libblkid1:i386 libbrotli1:i386 libbsd0:i386 libcairo-gobject2:i386 libcairo2:i386 libcap2:i386 libcodec2-1.0:i386 libcrypt1:i386 libcuda1:i386 libdatrie1:i386 libdav1d6:i386 libdb5.3:i386 libdbus-1-3:i386 libdecor-0-0:i386 libdecor-0-plugin-1-cairo:i386 libdeflate0:i386 libdrm-amdgpu1:i386 libdrm-intel1:i386 libdrm-nouveau2:i386 libdrm-radeon1:i386 libdrm2:i386 libedit2:i386 libegl-mesa0:i386 libegl-nvidia0:i386 libelf1:i386 libexpat1:i386 libffi8:i386 libflac12:i386 libfontconfig1:i386 libfreetype6:i386 libfribidi0:i386 libgcc-s1:i386 libgcrypt20:i386 libgdk-pixbuf-2.0-0:i386 libgl1-nvidia-glvnd-glx:i386 libglapi-mesa:i386 libgles-nvidia1:i386 libgles-nvidia2:i386 libgles1:i386 libgles2:i386 libglib2.0-0:i386 libglvnd0:i386 libglx-mesa0:i386 libglx-nvidia0:i386 libglx0:i386 libgmp10:i386 libgnutls30:i386 libgomp1:i386 libgpg-error-l10n libgpg-error0:i386 libgraphite2-3:i386 libgsm1:i386 libharfbuzz0b:i386 libhogweed6:i386 libhwy1:i386 libicu72:i386 libidn2-0:i386 libigdgmm12:i386 libjack-jackd2-0:i386 libjbig0:i386 libjpeg62-turbo:i386 libjxl0.7:i386 liblcms2-2:i386 liblerc4:i386 libllvm15:i386 liblz4-1:i386 liblzma5:i386 libmd0:i386 libmount1:i386 libmp3lame0:i386 libmpg123-0:i386 libnettle8:i386 libnm0:i386 libnuma1:i386 libnvcuvid1:i386 libnvidia-allocator1:i386 libnvidia-egl-gbm1:i386 libnvidia-eglcore:i386 libnvidia-encode1:i386 libnvidia-glcore:i386 libnvidia-glvkspirv:i386 libnvidia-ptxjitcompiler1:i386 libogg0:i386 libopengl0:i386 libopenjp2-7:i386 libopus0:i386 libp11-kit0:i386 libpango-1.0-0:i386 libpangocairo-1.0-0:i386 libpangoft2-1.0-0:i386 libpciaccess0:i386 libpcre2-8-0:i386 libpixman-1-0:i386 libpng16-16:i386 libpulse0:i386 librav1e0:i386 librsvg2-2:i386 librsvg2-common:i386 libsamplerate0:i386 libsdl2-2.0-0:i386 libselinux1:i386 libsensors5:i386 libshine3:i386 libsnappy1v5:i386 libsndfile1:i386 libsoxr0:i386 libspeex1:i386 libspeexdsp1:i386 libstdc++6:i386 libsvtav1enc1:i386 libswresample4:i386 libsystemd0:i386 libtasn1-6:i386 libthai0:i386 libtheora0:i386 libtiff6:i386 libtinfo6:i386 libtwolame0:i386 libudev1:i386 libunistring2:i386 libutempter0 libva-drm2:i386 libva-glx2 libva-glx2:i386 libva-x11-2:i386 libva2:i386 libvdpau-va-gl1:i386 libvdpau1:i386 libvorbis0a:i386 libvorbisenc2:i386 libvpx7:i386 libvulkan1:i386 libwayland-client0:i386 libwayland-cursor0:i386 libwayland-egl1:i386 libwayland-server0:i386 libwebp7:i386 libwebpmux3:i386 libx11-6 libx11-6:i386 libx11-data libx11-dev libx11-xcb1 libx11-xcb1:i386 libx264-164:i386 libx265-199:i386 libxau6:i386 libxcb-dri2-0:i386 libxcb-dri3-0:i386 libxcb-glx0:i386 libxcb-present0:i386 libxcb-randr0:i386 libxcb-render0:i386 libxcb-shm0:i386 libxcb-sync1:i386 libxcb-xfixes0:i386 libxcb1:i386 libxcursor1:i386 libxdamage1:i386 libxdmcp6:i386 libxext6:i386 libxfixes3:i386 libxi6:i386 libxinerama1:i386 libxkbcommon0:i386 libxml2:i386 libxrandr2:i386 libxrender1:i386 libxshmfence1:i386 libxss1:i386 libxvidcore4:i386 libxxf86vm1:i386 libz3-4:i386 libzstd1:i386 libzvbi0:i386 mesa-va-drivers:i386 mesa-vdpau-drivers:i386 mesa-vulkan-drivers:i386 nvidia-egl-icd:i386 nvidia-vulkan-icd:i386 ocl-icd-libopencl1 ocl-icd-libopencl1:i386 steam-devices steam-libs:i386 va-driver-all:i386 vdpau-driver-all:i386 zlib1g:i386
+
+# Download installer https://store.steampowered.com/about/download
+
+sudo dpkg -i steam_latest.deb
+
+# might need to fix install
+sudo apt --fix-broken install
+
+# run steam, should install if something still needed
+# after this you can install nvidia cuda, cudnn & tensort...
+```
+
+# NVidia Cuda & cuDNN
+These requires developer account, after steam install most likely
+.deb packages won't work but use the installers instead.
+
 - [Cuda toolkit](https://developer.nvidia.com/cuda-toolkit-archive)
 - [Cudnn](https://developer.nvidia.com/cudnn)
   - [Nvidia instructions](https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html)
@@ -102,6 +125,7 @@ It nvidia-smi works then good to go.
 Using 11.8 at the moment (pytorch)
 
 ```bash
+# Deb(s)
 sudo dpkg -i cuda-repo-debian11-11-8-local_11.8.0-520.61.05-1_amd64.deb
 sudo cp /var/cuda-repo-debian11-11-8-local/cuda-*-keyring.gpg /usr/share/keyrings/
 
@@ -112,7 +136,24 @@ sudo apt update
 
 sudo apt install cuda libcudnn8 libcudnn8-dev libcudnn8-samples
 
-# Run the sample to verify all works
+# Installer(s)
+# override cause gcc is too new (sample worked with deb packages)
+# just select cuda, samples + docs (no driver as older, kernel-fs does not install/work)
+sudo ./cuda_11.7.1_515.65.01_linux.run --override
+
+# pytorch acceleration should work after cuda install
+
+# download cudnn tar and extract to cudnn folder
+# copy files and set permissions
+sudo cp cudnn/include/cudnn* /usr/local/cuda/include
+sudo cp cudnn/lib/libcudnn* /usr/local/cuda/lib64/
+sudo chmod a+r /usr/local/cuda/include/cudnn* /usr/local/cuda/lib64/libcudnn*
+
+# need to setup LD_LIBRARY_PATH to contain that folder we just copied libraries into
+# (added to .bash_aliases)
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64/
+
+# nvidia cudnn samples should work (need overrides to compile with new gcc)
 ```
 
 ## TensorRT
@@ -203,25 +244,6 @@ sudo apt install microsoft-edge-beta
 ```
 ```bash
 sudo apt install microsoft-edge-dev
-```
-# Steam
-Has lot's of dependencies which be installed in progress, especially if no gnome installed from distro, but still there will be packages for sure.
-
-Download: https://store.steampowered.com/about/download
-
-```bash
-# steam requires 32-bit libraries
-sudo dpkg --add-architecture i386
-# it should not remove any existing ones...
-sudo dpkg -i steam_latest.deb
-sudo apt --fix-broken install
-# run steam from cmd line should run steamdeps with sudo
-# for some reason the dependant packages want to uninstall
-# my installed cuda libraries...
-# so one post in SO says if you install it using the installer
-# instead .deb package it should work...
-# guess i could try, just uninstall them and try installing
-# using installer...
 ```
 
 # Spotify
