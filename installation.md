@@ -122,7 +122,12 @@ These requires developer account, after steam install most likely
 - [Cudnn](https://developer.nvidia.com/cudnn)
   - [Nvidia instructions](https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html)
 
-Using 11.8 at the moment (pytorch)
+** USE THE INSTALLER AND TAR PACKAGES NOT DEB(s) **
+** CUDA INSTALLER HAS DRIVER ALSO, BETTER TO USE THAT (remove OS one) **
+** STEAM ACTUALLY RUNS EVEN THO UNINSTALLED ALL NVIDIA PACKAGES **
+
+Using 12.1 at the moment
+~~Using 11.8 at the moment (pytorch)~~
 
 ```bash
 # Deb(s)
@@ -160,6 +165,128 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64/
 Someday maybe when can fullfill its python dependency, which is odd as I can have conda environent different python, think I just don't understand how to use this...
 - [TensorRT](https://docs.nvidia.com/deeplearning/tensorrt/archives/index.html#trt_7)
 
+## NVidia issues
+
+### Cuda
+nvidia-smi might fail if theres is a mismatch between driver and library versions
+this happens if newer driver is installed and the libraries are older. Something has
+updated my nvidia driver so it is now incompatible with the installed cuda... (my fault ofc)
+
+To check driver version
+```bash
+cat /proc/driver/nvidia/version
+NVRM version: NVIDIA UNIX x86_64 Kernel Module  525.89.02  Wed Feb  1 23:23:25 UTC 2023
+```
+
+I first checked whats available on nvidia sites. Downloaded:
+- cuda_12.1.0_530.30.02_linux.run
+- cudnn-linux-x86_64-8.8.1.3_cuda12-archive.tar.xz
+
+Next ran `/usr/local/cuda-11.7/bin/cuda-uninstaller`
+
+`Successfully uninstalled`
+
+Lets try installing the new one now again `cuda_12.1.0_530.30.02_linux.run`
+
+Still complained about the persistence daemon, I might have to nuke the whole driver that is installed
+by apt to use the driver which is part the cuda package, or test cuda without installing the driver
+if it works with the current one. Driver I have installed is most likely too old to work so I am kinda
+fucked.
+
+Lets try just uninstalling `nvidia-driver nvidia-driver-bin nvidia-persistenced`
+
+Running cuda installer again
+
+```
+The NVIDIA driver appears to have been installed previously using a different installer. To prevent potential conflicts, it is recommended either to update the existing installation using the same mechanism by which it was originally installed, or to uninstall the existing installation before installing this driver.
+```
+
+Basically I tried to uninstall just some packages with the name `nvidia` on em, tried keeping the i386 architecture
+libraries to prevent Steam to break. But cuda installer won't install driver before all packages were removed from system
+so basically easiest is to nuke all installed packages with `nvidia` in the name...
+
+Then cuda installer runs thru
+```
+===========
+= Summary =
+===========
+
+Driver:   Installed
+Toolkit:  Installed in /usr/local/cuda-12.1/
+
+Please make sure that
+ -   PATH includes /usr/local/cuda-12.1/bin
+ -   LD_LIBRARY_PATH includes /usr/local/cuda-12.1/lib64, or, add /usr/local/cuda-12.1/lib64 to /etc/ld.so.conf and run ldconfig as root
+
+To uninstall the CUDA Toolkit, run cuda-uninstaller in /usr/local/cuda-12.1/bin
+To uninstall the NVIDIA Driver, run nvidia-uninstall
+Logfile is /var/log/cuda-installer.log
+```
+I have already LD_LIBRARY_PATH set and installer makes symbolic link to it so its ok.
+
+nvidia-smi works now again
+```
+Wed Mar 29 19:14:44 2023
++---------------------------------------------------------------------------------------+
+| NVIDIA-SMI 530.30.02              Driver Version: 530.30.02    CUDA Version: 12.1     |
+|-----------------------------------------+----------------------+----------------------+
+| GPU  Name                  Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf            Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                                         |                      |               MIG M. |
+|=========================================+======================+======================|
+|   0  NVIDIA GeForce RTX 3060         Off| 00000000:01:00.0 Off |                  N/A |
+| 49%   45C    P0               36W / 170W|      0MiB / 12288MiB |      0%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+
++---------------------------------------------------------------------------------------+
+| Processes:                                                                            |
+|  GPU   GI   CI        PID   Type   Process name                            GPU Memory |
+|        ID   ID                                                             Usage      |
+|=======================================================================================|
+|  No running processes found                                                           |
++---------------------------------------------------------------------------------------+
+```
+
+### cuDNN
+So the cuda uninstaller removed old libraries so we can just copy new ones same way in place
+
+```bash
+sudo cp cudnn/include/cudnn* /usr/local/cuda/include
+sudo cp cudnn/lib/libcudnn* /usr/local/cuda/lib64/
+sudo chmod a+r /usr/local/cuda/include/cudnn* /usr/local/cuda/lib64/libcudnn*
+```
+
+### Testing cuDNN
+- Sample compiled and worked
+
+### Testing PyTorch
+Ran test in my earlier made conda environment
+```python
+import torch
+print("is available: "+str(torch.cuda.is_available()))
+print("device count: "+str(torch.cuda.device_count()))
+print("current device: "+str(torch.cuda.current_device()))
+print("device 0: "+str(torch.cuda.device(0)))
+print("device(0) name: "+torch.cuda.get_device_name(0))
+print("device(0) capability: "+str(torch.cuda.get_device_capability(0)))
+print("device(0) properties: "+str(torch.cuda.get_device_properties(0)))
+print("device(0) memory_allocated: "+str(torch.cuda.memory_allocated()))
+print("device(0) memory_reserved: "+str(torch.cuda.memory_reserved()))
+
+```
+It works, im happy :D
+
+### Testing Tensorflow
+Recreated my tf environment again and it also works
+```python
+import tensorflow as tf
+if tf.test.gpu_device_name():
+    print('Default GPU Device: {}'.format(tf.test.gpu_device_name()))
+else:
+    print("Please install GPU version of TF")
+```
+It works, im happy :D
 
 # System state - disable all but hibernate
 ```bash
