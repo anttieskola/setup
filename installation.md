@@ -287,6 +287,14 @@ python3 -m pip install /usr/local/TensorRT/graphsurgeon/graphsurgeon-0.4.6-py2.p
 python3 -m pip install /usr/local/TensorRT/onnx_graphsurgeon/onnx_graphsurgeon-0.3.12-py2.py3-none-any.whl
 ```
 
+### Shell setup
+Using .bash_aliases setup atm
+```bash
+# nvidia -Cuda, -cuDNN, -TensorRT libs/binaries
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64/:/usr/local/TensorRT/lib
+export PATH=$PATH:/usr/local/cuda/bin:/usr/local/TensorRT/bin
+```
+
 ### Testing cuDNN
 - Sample compiled and worked
 
