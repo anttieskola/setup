@@ -255,6 +255,36 @@ So the cuda uninstaller removed old libraries so we can just copy new ones same 
 sudo cp cudnn/include/cudnn* /usr/local/cuda/include
 sudo cp cudnn/lib/libcudnn* /usr/local/cuda/lib64/
 sudo chmod a+r /usr/local/cuda/include/cudnn* /usr/local/cuda/lib64/libcudnn*
+# add lib path to LD_LIBRARY_PATH env variable (.bash_aliases)
+```
+
+### Tensor RT
+
+```bash
+tar xfvz TensorRT-8.6.0.12.Linux.x86_64-gnu.cuda-12.0.tar.gz
+sudo cp -R TensorRT-8.6.0.12 /usr/local/
+sudo ln -s /usr/local/TensorRT-8.6.0.12/ /usr/local/TensorRT
+sudo chmod a+r /usr/local/TensorRT/bin/* /usr/local/TensorRT/include/* /usr/local/TensorRT/lib/*
+# add lib path to LD_LIBRARY_PATH env variable (.bash_aliases) remember to restart shell -> conda
+
+# Installation could be done just to home folder
+# C++ samples seem to require some libs I don't have
+# Should first to to run python samples in conda environment
+```
+
+#### Tensor RT to conda environment
+cpXX == python version (current using 3.9)
+
+In conda environment (tf)
+```bash
+python3 -m pip install /usr/local/TensorRT/python/tensorrt-8.6.0-cp39-none-linux_x86_64.whl
+python3 -m pip install /usr/local/TensorRT/python/tensorrt_lean-8.6.0-cp39-none-linux_x86_64.whl
+python3 -m pip install /usr/local/TensorRT/python/tensorrt_dispatch-8.6.0-cp39-none-linux_x86_64.whl
+
+python3 -m pip install /usr/local/TensorRT/uff/uff-0.6.9-py2.py3-none-any.whl
+
+python3 -m pip install /usr/local/TensorRT/graphsurgeon/graphsurgeon-0.4.6-py2.py3-none-any.whl
+python3 -m pip install /usr/local/TensorRT/onnx_graphsurgeon/onnx_graphsurgeon-0.3.12-py2.py3-none-any.whl
 ```
 
 ### Testing cuDNN
