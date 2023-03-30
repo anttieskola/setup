@@ -56,9 +56,14 @@ sudo systemctl set-default graphical.target
 sudo systemctl reboot
 ```
 
-# Basic stuuf
+# Basic stuff
 ```bash
 sudo apt install git make gcc tcl libssl-dev libsystemd-dev libc6 libgcc-s1 libstdc++6 zlib1g ca-certificates apt-transport-https libfreeimage3 libfreeimage-dev
+```
+
+# Kernel stuff
+```bash
+sudo apt install linux-image-amd64 linux-headers-amd64 linux-source
 ```
 
 # AMD
@@ -69,6 +74,8 @@ sudo isenkram-autoinstall-firmware
 ```
 
 # Nvidia driver only (rest after steam)
+Just need to blacklist nouveau (driver installer does this, but would be nice to blacklist it during installation). Then without installing anything can run cuda installer.
+
 Helper tools
 ```bash
 sudo apt install nvidia-detect inxi
@@ -426,4 +433,13 @@ echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sou
 
 ```bash
 sudo apt install spotify-client
+```
+
+# RSync
+Use rsync to copy/move stuff between hosts
+```bash
+# a == archive mode; equals -rlptgoD
+# v == verbose
+# r == recursive
+rsync -av Downloads/* antti@god:~/Downloads/
 ```
