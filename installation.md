@@ -315,6 +315,11 @@ sudo apt install lm-sensors psensor
 sudo apt install gnome-keyring libqt5keychain1
 ```
 
+# Nginx
+```bash
+sudo apt install nginx-full
+```
+
 # Rust
 No need if using home backup where it is installed
 ```bash
