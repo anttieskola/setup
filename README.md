@@ -1,6 +1,6 @@
 This repository contains notes on my personal server/workstation/rasbpi/... installations and the setup of software into those i.e. postgresql, nginx, redis...
 
-- [installation](/installation.md)
+- [Host installation](/installation.md)
 - [utilities](/utilities.md)
 
 # Basic things
@@ -12,12 +12,8 @@ This repository contains notes on my personal server/workstation/rasbpi/... inst
 # Desktop environments
 - [kde](/kde.md)
 
-# Advanced
-- [python](/python.md)
-
-# Software
+# Software/Service
+- [nginx](/nginx.md)
+- [Let's encrypt](/letsencrypt.md)
 - TODO: [firewall](/firewall.md)
 - TODO: [postgresql](/postgresql.md)
-- TODO: [nginx](/nginx.md)
-- TODO: [redis](/redis.md)
-    - copy from study-cache repo
