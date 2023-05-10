@@ -5,5 +5,13 @@
 sudo apt install nginx-full
 ```
 
-## TLS configuration
-- Todo (let's encrypt)
+## Redirect http to https
+Configure to the site (running only one site atm)
+
+```
+server {
+        listen 80 default_server;
+        server_name _;
+        return 301 https://$host$request_uri;
+}
+```
