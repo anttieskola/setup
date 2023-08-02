@@ -3,6 +3,8 @@
 ## Installation
 ```bash
 sudo apt install nginx-full
+# for simple authentication (htpasswd utility)
+sudo apt install apache2-utils
 ```
 
 ## Redirect http to https
@@ -32,3 +34,17 @@ Configured gzip compression for x-javascript and assembly in `nginx.conf`
         gzip_types text/plain text/css application/json application/javascript application/x-javascript text/xml application/wasm application/xml application/xml+rss text/javascript;
 ```
 This reduces webassembly sizes up to half of original :)
+
+## Basic auth
+Configuration part if using simple passwd file:
+```
+location /ai/ {
+                auth_basic "Restricted area, sorry.";
+                auth_basic_user_file /etc/nginx/.htpasswd;
+        }
+```
+
+Adding users from command line/creating file:
+```bash
+sudo htpasswd -c /etc/nginx/.htpasswd antti
+```
