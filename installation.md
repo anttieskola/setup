@@ -427,6 +427,11 @@ Pressing `m` you can enable/disable settings. When you see green `00` letters it
 
 ![Alsamixer settings](./alsamixer.png)
 
+# Node/npm
+```bash
+sudo apt nodejs npm
+```
+
 # Steam
 ***STEAM ACTUALLY RUNS EVEN THO UNINSTALLED ALL NVIDIA PACKAGES*** so on other machine installed debian nvidia driver, dependencies and got steam running. Purged all nvidia packages (including driver) to install driver using cuda installer, steam still runs after that.
 
