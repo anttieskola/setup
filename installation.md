@@ -405,6 +405,11 @@ Use rsync to copy/move stuff between hosts
 rsync -av Downloads/* antti@god:~/Downloads/
 ```
 
+# Webcam
+```bash
+sudo apt install cheese
+```
+
 # Sound Blaster
 - Most likely package: `firmware-misc-nonfree` has to be installed
     - sound blaster has dsp
