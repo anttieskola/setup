@@ -92,7 +92,7 @@ These requires NVidia developer account
 
 ```bash
 # packages that installer requires
-sudo apt install build-essential libglvnd-dev pkg-config 
+sudo apt install build-essential libglvnd-dev pkg-config
 sudo apt install linux-image-amd64 linux-source linux-headers-X.X.X
 ```
 
@@ -434,7 +434,7 @@ Pressing `m` you can enable/disable settings. When you see green `00` letters it
 
 # Node/npm
 ```bash
-sudo apt nodejs npm
+sudo apt install nodejs npm
 ```
 
 # Steam

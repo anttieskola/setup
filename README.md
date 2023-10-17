@@ -15,5 +15,6 @@ This repository contains notes on my personal server/workstation/rasbpi/... inst
 # Software/Service
 - [nginx](/nginx.md)
 - [Let's encrypt](/letsencrypt.md)
-- TODO: [firewall](/firewall.md)
+- [redis](/redis.md)
+- [firewall](/firewall.md)
 - TODO: [postgresql](/postgresql.md)
