@@ -378,6 +378,19 @@ sudo apt install microsoft-edge-beta
 ```bash
 sudo apt install microsoft-edge-dev
 ```
+## Teams
+Set package source
+```bash
+# this seems to be the correct one
+sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/ms-teams stable main" > /etc/apt/sources.list.d/teams.list'
+
+# but all sources are zero so it has been used but somehow wiped content...
+# 13-Nov-2023 16:08 all files from repo have been wiped
+sudo apt update
+sudo apt install teams
+```
+
+
 
 # Spotify
 Current version has no font scaling so its kinda useless, better to use browser at the moment.
@@ -403,6 +416,11 @@ Use rsync to copy/move stuff between hosts
 # v == verbose
 # r == recursive
 rsync -av Downloads/* antti@god:~/Downloads/
+```
+
+# iPhone
+```bash
+sudo apt install libimobiledevice6 libimobiledevice-utils ifuse
 ```
 
 # Webcam
