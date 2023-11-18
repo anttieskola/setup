@@ -420,7 +420,14 @@ rsync -av Downloads/* antti@god:~/Downloads/
 
 # iPhone
 ```bash
+# required tools
 sudo apt install libimobiledevice6 libimobiledevice-utils ifuse
+
+# mounting device
+# make folder
+sudo mkdir /media/iPhone
+chown -R antti:antti /media/iPhone
+ifuse /media/iPhone
 ```
 
 # Webcam
