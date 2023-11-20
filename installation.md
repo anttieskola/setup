@@ -439,6 +439,7 @@ load-module module-bluetooth-policy
 # to
 load-module module-bluetooth-policy auto_switch=2
 ```
+- restart pulseaudio & xServer
 
 # Webcam
 ```bash
