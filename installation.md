@@ -430,6 +430,16 @@ chown -R antti:antti /media/iPhone
 ifuse /media/iPhone
 ```
 
+# Bose quietcomfort 35
+## Getting mic to work with bluetooth
+- modify file `/etc/pulse/default.pa`
+```conf
+# modify line
+load-module module-bluetooth-policy
+# to
+load-module module-bluetooth-policy auto_switch=2
+```
+
 # Webcam
 ```bash
 sudo apt install cheese
