@@ -425,9 +425,13 @@ sudo apt install libimobiledevice6 libimobiledevice-utils ifuse
 
 # mounting device
 # make folder
-sudo mkdir /media/iPhone
-chown -R antti:antti /media/iPhone
-ifuse /media/iPhone
+sudo mkdir /media/iphone
+chown -R antti:antti /media/iphone
+ifuse /media/iphone
+
+# unmount
+fusermount -u /media/iphone
+```
 ```
 
 # Bose quietcomfort 35
