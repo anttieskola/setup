@@ -1,5 +1,14 @@
 # Nginx
 
+## Errors
+```bash
+# Check Nginx configuration syntax
+sudo nginx -t
+
+# Tail Nginx error logs
+sudo tail -f /var/log/nginx/error.log
+```
+
 ## Installation
 ```bash
 sudo apt install nginx-full
