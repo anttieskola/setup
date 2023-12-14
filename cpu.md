@@ -1,0 +1,4 @@
+# Underclock cpu
+```bash
+cpulimit
+```
