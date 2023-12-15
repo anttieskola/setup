@@ -1,9 +1,53 @@
 # Using
 
-## Underclocking gpu
-- using powerlevel, for example RTX 3060 is xW / 170W
+# RTX 4060TI 16Gbit issues
+- Card works as basic display driver, but there is ERR! in nvidia-smi
+- This means it is not usable CUDA device
+- Note this happened when tried to use the same driver that have been using...
+
+```
++---------------------------------------------------------------------------------------+
+| NVIDIA-SMI 530.30.02              Driver Version: 530.30.02    CUDA Version: 12.1     |
+|-----------------------------------------+----------------------+----------------------+
+| GPU  Name                  Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf            Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                                         |                      |               MIG M. |
+|=========================================+======================+======================|
+|   0  ERR!                            Off| 00000000:01:00.0 Off |                  N/A |
+|  0%   40C    P8               11W / 165W|    610MiB / 16380MiB |      1%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+```
+
+- Downloading latest cuda driver `cuda_12.3.1_545.23.08_linux.run`
+- Downloading latest cuDNN `cudnn-linux-x86_64-8.9.7.29_cuda12-archive.tar.xz`
+
+## Uninstall
+- Run `sudo /usr/local/cuda-12.1/bin/cuda-uninstaller`
+- Run `sudo nvidia-uninstall`
+- Reboot
+
+## Install
+- Run `sudo cuda_12.3.1_545.23.08_linux.run --override`
+- Extract cudnn into cuddn folder
+- Run
+
 ```bash
-nvidia-smi --power-limit=150
+sudo cp cudnn/include/cudnn* /usr/local/cuda/include
+sudo cp cudnn/lib/libcudnn* /usr/local/cuda/lib64/
+sudo chmod a+r /usr/local/cuda/include/cudnn* /usr/local/cuda/lib64/libcudnn*
+```
+
+## Underclocking gpu
+
+## RTX 4060TI is x / 165W
+```bash
+nvidia-smi --power-limit=120
+```
+
+## RTX 3060 is xW / 170W
+```bash
+nvidia-smi --power-limit=120
 ```
 
 # Installation
