@@ -31,6 +31,7 @@
 - Run `sudo cuda_12.3.1_545.23.08_linux.run --override`
 - Extract cudnn into cuddn folder
 - Run
+- Did install same TensorRT as earlier but have not tested it
 
 ```bash
 sudo cp cudnn/include/cudnn* /usr/local/cuda/include
