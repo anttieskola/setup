@@ -182,8 +182,6 @@ sudo apt update
 sudo apt install teams
 ```
 
-
-
 # Spotify
 Current version has no font scaling so its kinda useless, better to use browser at the moment.
 
@@ -224,9 +222,9 @@ ifuse /media/iphone
 # unmount
 fusermount -u /media/iphone
 ```
-```
 
 # Bose quietcomfort 35
+
 ## Getting mic to work with bluetooth
 - modify file `/etc/pulse/default.pa`
 ```conf
@@ -236,6 +234,47 @@ load-module module-bluetooth-policy
 load-module module-bluetooth-policy auto_switch=2
 ```
 - restart pulseaudio & xServer
+
+# Pulseaudio
+- [Pulseaudio systemtray](https://github.com/christophgysin/pasystray)
+- List available sources
+```bash
+pactl list sources
+```
+
+Example
+```
+Source #8
+        State: IDLE
+        Name: bluez_sink.2C_41_A1_07_F9_20.a2dp_sink.monitor
+        Description: Monitor of Bose QC Antti
+        Driver: module-bluez5-device.c
+        Sample Specification: s16le 2ch 44100Hz
+        Channel Map: front-left,front-right
+        Owner Module: 25
+        Mute: no
+        Volume: front-left: 65536 / 100% / 0.00 dB,   front-right: 65536 / 100% / 0.00 dB
+                balance 0.00
+        Base Volume: 65536 / 100% / 0.00 dB
+        Monitor of Sink: bluez_sink.2C_41_A1_07_F9_20.a2dp_sink
+        Latency: 0 usec, configured 39512 usec
+        Flags: DECIBEL_VOLUME LATENCY
+        Properties:
+                device.description = "Monitor of Bose QC Antti"
+                device.class = "monitor"
+                device.string = "2C:41:A1:07:F9:20"
+                device.api = "bluez"
+                device.bus = "bluetooth"
+                device.form_factor = "headphone"
+                bluez.path = "/org/bluez/hci0/dev_2C_41_A1_07_F9_20"
+                bluez.class = "0x240418"
+                bluez.alias = "Bose QC Antti"
+                device.icon_name = "audio-headphones-bluetooth"
+        Formats:
+                pcm
+```
+
+
 
 # Webcam
 ```bash

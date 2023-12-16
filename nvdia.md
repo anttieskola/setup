@@ -1,45 +1,42 @@
-# Using
-
-# RTX 4060TI 16Gbit issues
-- Card works as basic display driver, but there is ERR! in nvidia-smi
-- This means it is not usable CUDA device
-- Note this happened when tried to use the same driver that have been using...
-
-```
-+---------------------------------------------------------------------------------------+
-| NVIDIA-SMI 530.30.02              Driver Version: 530.30.02    CUDA Version: 12.1     |
-|-----------------------------------------+----------------------+----------------------+
-| GPU  Name                  Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
-| Fan  Temp  Perf            Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
-|                                         |                      |               MIG M. |
-|=========================================+======================+======================|
-|   0  ERR!                            Off| 00000000:01:00.0 Off |                  N/A |
-|  0%   40C    P8               11W / 165W|    610MiB / 16380MiB |      1%      Default |
-|                                         |                      |                  N/A |
-+-----------------------------------------+----------------------+----------------------+
-```
-
+# Simple installation notes
 - Downloading latest cuda driver `cuda_12.3.1_545.23.08_linux.run`
 - Downloading latest cuDNN `cudnn-linux-x86_64-8.9.7.29_cuda12-archive.tar.xz`
+    - Extract into cudnn folder
+- There is no TensorRT for Cuda 12.3 atm
 
 ## Uninstall
+If kernel get's updated (apt) it breaks the drivers... so have to reinstall
 - Run `sudo /usr/local/cuda-12.1/bin/cuda-uninstaller`
 - Run `sudo nvidia-uninstall`
-- Reboot
+- Reboot (seems not needed)
 
 ## Install
 - Run `sudo cuda_12.3.1_545.23.08_linux.run --override`
-- Extract cudnn into cuddn folder
-- Run
-- Did install same TensorRT as earlier but have not tested it
-
 ```bash
 sudo cp cudnn/include/cudnn* /usr/local/cuda/include
 sudo cp cudnn/lib/libcudnn* /usr/local/cuda/lib64/
 sudo chmod a+r /usr/local/cuda/include/cudnn* /usr/local/cuda/lib64/libcudnn*
 ```
 
-## Underclocking gpu
+## TensorRT (latest 8.6.1.6)
+Most likely will not work (as no support for latest Cuda)
+```bash
+tar xfvz TensorRT-8.6.1.6.Linux.x86_64-gnu.cuda-12.0.tar.gz
+sudo cp -R TensorRT-8.6.1.6 /usr/local/
+sudo ln -s /usr/local/TensorRT-8.6.0.12/ /usr/local/TensorRT
+sudo chmod a+r /usr/local/TensorRT/bin/* /usr/local/TensorRT/include/* /usr/local/TensorRT/lib/*
+```
+
+## Library paths
+Current set these in .bash_aliases
+```bash
+# nvidia -Cuda, -cuDNN, -TensorRT libs/binaries
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64/:/usr/local/TensorRT/lib
+export PATH=$PATH:/usr/local/cuda/bin:/usr/local/TensorRT/bin
+
+```
+
+# Underclocking gpu
 
 ## RTX 4060TI is x / 165W
 ```bash
@@ -51,7 +48,7 @@ nvidia-smi --power-limit=120
 nvidia-smi --power-limit=120
 ```
 
-# Installation
+# Old Installation notes
 These requires NVidia developer account
 
 - [Cuda toolkit](https://developer.nvidia.com/cuda-toolkit-archive)
