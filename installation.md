@@ -119,6 +119,17 @@ curl --proto '=https' --tlsv1.3 -sSf https://sh.rustup.rs | sh
 # C#
 Installed in home/path (backup), just recreate symlink dotnet -> dotnetX
 
+## INotify
+Can add the following to `.bash_aliases` to prevent all config file watching
+```bash
+export DOTNET_USE_POLLING_FILE_WATCHER=true
+```
+
+Can add the following to `/etc/sysctl.conf` increase the limit of amount files to be watched
+```bash
+fs.inotify.max_user_watches=2048
+```
+
 # Python
 ```bash
 # not found in bookworm anymore
