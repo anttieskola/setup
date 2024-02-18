@@ -4,14 +4,18 @@
     - Extract into cudnn folder
 - There is no TensorRT for Cuda 12.3 atm
 
-## Uninstall
-If kernel get's updated (apt) it breaks the drivers... so have to reinstall
-- Run `sudo /usr/local/cuda-12.1/bin/cuda-uninstaller`
-- Run `sudo nvidia-uninstall`
-- Reboot (seems not needed)
+## Bug
+- https://lists.debian.org/debian-stable-announce/2024/02/msg00002.html
 
-## Install
-- Run `sudo cuda_12.3.1_545.23.08_linux.run --override`
+Gotta update sources.list
+```
+deb http://deb.debian.org/debian/ bookworm-updates main non-free contrib non-free-firmware
+deb-src http://deb.debian.org/debian/ bookworm-updates main non-free contrib non-free-firmware
+```
+Then can install latest kernel so compilation works
+
+## Underclocking gpu
+- using powerlevel, for example RTX 3060 is xW / 170W
 ```bash
 sudo cp cudnn/include/cudnn* /usr/local/cuda/include
 sudo cp cudnn/lib/libcudnn* /usr/local/cuda/lib64/
