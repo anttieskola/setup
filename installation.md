@@ -218,7 +218,6 @@ Use rsync to copy/move stuff between hosts
 # r == recursive
 rsync -av Downloads/* antti@god:~/Downloads/
 ```
-
 # iPhone
 ```bash
 # required tools
