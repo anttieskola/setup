@@ -7,6 +7,7 @@ This repository contains notes on my personal server/workstation/rasbpi/... inst
 - [ssh](/ssh.md)
 - [git](/git.md)
 - [samba](/samba.md)
+- [encrypt filesystem](/crypt_fs.md)
 - [encrypted storage](/crypt.md)
 
 # Desktop environments

@@ -127,8 +127,9 @@ export DOTNET_USE_POLLING_FILE_WATCHER=true
 
 Can add the following to `/etc/sysctl.conf` increase the limit of amount files to be watched
 ```bash
-fs.inotify.max_user_watches=2048
+fs.inotify.max_user_watches=524288
 ```
+
 
 # Python
 ```bash
