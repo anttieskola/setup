@@ -56,7 +56,7 @@ sudo systemctl reboot
 
 # Basic stuff
 ```bash
-sudo apt install git git-lfs make gcc tcl libssl-dev libsystemd-dev libc6 libgcc-s1 libstdc++6 zlib1g ca-certificates apt-transport-https libfreeimage3 libfreeimage-dev curl cpulimit neofetch
+sudo apt install git git-lfs make gcc tcl libssl-dev libsystemd-dev libc6 libgcc-s1 libstdc++6 zlib1g ca-certificates apt-transport-https libfreeimage3 libfreeimage-dev curl cpulimit neofetch smartmontools
 ```
 
 # Kernel stuff
@@ -129,7 +129,6 @@ Can add the following to `/etc/sysctl.conf` increase the limit of amount files t
 ```bash
 fs.inotify.max_user_watches=524288
 ```
-
 
 # Python
 ```bash
@@ -219,6 +218,7 @@ Use rsync to copy/move stuff between hosts
 # r == recursive
 rsync -av Downloads/* antti@god:~/Downloads/
 ```
+
 # iPhone
 ```bash
 # required tools
@@ -337,4 +337,31 @@ sudo apt --fix-broken install
 
 # run steam, should install if something still needed
 # after this you can install nvidia cuda, cudnn & tensort...
+```
+
+# Must have apps
+
+## VLC
+```bash
+sudo apt install vlc
+```
+
+## Screenshots
+```bash
+sudo apt install kde-spectacle
+```
+
+## OBS Recording/Streaming
+```bash
+sudo apt install obs-studio
+```
+
+## Gimp (image editor)
+```bash
+sudo apt install gimp
+```
+
+## Openshot (video editor)
+```bash
+sudo apt install openshot-qt
 ```

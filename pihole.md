@@ -1,3 +1,14 @@
-# Manually added to block list
+# Filters
 - nelonenmedia-pmd-ads-spotgate.nm-stream.nelonenmedia.fi
-  - Ruutu.fi advertisements
+- nelonenmedia-pmd-ads-manual.nm-stream.nelonenmedia.fi
+- playback2.a2d.tv
+- a-fds.youborafds01.com
+- mask.icloud.com
+- log.core.cloud.vewd.com
+- (\.|^)ingest\.sentry\.io$
+- (\.|^)events\.data\.microsoft\.com$
+- (\.|^)in\.applicationinsights\.azure\.com$
+- optimizationguide-pa.googleapis.com
+- (\.|^)exp-tas\.com$
+- (\.|^)gstatic\.com$
+- (\.|^)fsapi\.com$
