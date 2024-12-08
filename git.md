@@ -3,6 +3,11 @@ Is not installed on default but just run
 sudo apt-get install git
 ```
 
+# Start ssh-agent
+````bash
+eval $(ssh-agent)
+````
+
 # SSH Keys
 Work same way as SSH login keys, we generate a key to be used like for example github. Then add the public key to github. Then add key into use on our local system and it just works.
 
