@@ -21,3 +21,17 @@
   - This breaks google sign in
 - (\.|^)fsapi\.com$
 - (\.|^)hotjar\.com$
+
+# Set nmcli use myself as dns
+```bash
+nmcli connection modify eth0 ipv4.dns "127.0.0.1 9.9.9.9"
+```
+
+# Max DB days
+```bash
+sudo nano /etc/pihole/pihole-FTL.conf
+# Add it
+MAXDBDAYS=7
+# Save and restart
+sudo systemctl restart pihole-FTL.service
+```
