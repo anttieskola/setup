@@ -365,3 +365,13 @@ sudo apt install gimp
 ```bash
 sudo apt install openshot-qt
 ```
+
+## Tor Browser
+```bash
+sudo apt install torbrowser-launcher
+```
+
+## Kleopatra (GPG)
+```bash
+sudo apt install kleopatra
+```
