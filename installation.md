@@ -357,9 +357,23 @@ sudo apt install obs-studio
 ```
 
 ## Gimp (image editor)
-```bash
-sudo apt install gimp
-```
+This will fix issues with heif files with the latest iPhone
+
+1. Remove GIMP if installed from apt
+````bash
+sudo apt remove gimp
+sudo apt autoremove
+````
+
+2. Install latest from flatpak
+````bash
+flatpak install https://flathub.org/repo/appstream/org.gimp.GIMP.flatpakref
+````
+
+3. Install backport (updated version of libheif)
+````bash
+sudo apt install -t bookworm-backports libheif1
+````
 
 ## Openshot (video editor)
 ```bash
