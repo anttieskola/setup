@@ -55,6 +55,31 @@
   - [Tor Browser](#tor-browser)
   - [Kleopatra (GPG)](#kleopatra-gpg)
 
+# Other notes
+- [cpu.md](./cpu.md)
+- [crypt.md](./crypt.md)
+- [crypt_fs.md](./crypt_fs.md)
+- [firewall.md](./firewall.md)
+- [git.md](./git.md)
+- [kde.md](./kde.md)
+- [kubernetes.md](./kubernetes.md)
+- [letsencrypt.md](./letsencrypt.md)
+- [nginx.md](./nginx.md)
+- [nmcli.md](./nmcli.md)
+- [nvdia.md](./nvdia.md)
+- [other/moving_boot.md](./other/moving_boot.md)
+- [other/networkmanager.md](./other/networkmanager.md)
+- [other/new_zeus.md](./other/new_zeus.md)
+- [pihole.md](./pihole.md)
+- [postgresql.md](./postgresql.md)
+- [raspberrys.md](./raspberrys.md)
+- [README.md](./README.md)
+- [redis.md](./redis.md)
+- [samba.md](./samba.md)
+- [ssh.md](./ssh.md)
+- [utilities.md](./utilities.md)
+- [wordpress.md](./wordpress.md)
+
 ## General
 - Use LVM if unsure on sizes
 
