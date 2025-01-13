@@ -1,6 +1,59 @@
 # DistroHop / Fresh install
-Notes for myself when installing or updating some nix box.
-Current environment bookworm beta2.
+- Notes for myself when installing or updating some nix box
+- Current environment bookworm on Debian & Raspberry Pi OS
+
+# Table of Contents
+- [DistroHop / Fresh install](#distrohop--fresh-install)
+  - [General](#general)
+  - [Partitioning used](#partitioning-used)
+  - [Swap](#swap)
+  - [Encryption (laptop)](#encryption-laptop)
+- [User: antti](#user-antti)
+- [Login/Boot method](#loginboot-method)
+  - [Console login](#console-login)
+  - [Graphical login](#graphical-login)
+- [Basic stuff](#basic-stuff)
+- [Kernel stuff](#kernel-stuff)
+- [AMD](#amd)
+- [ONLY NVidia driver](#only-nvidia-driver)
+- [flatpak](#flatpak)
+- [System state - disable all but hibernate](#system-state---disable-all-but-hibernate)
+- [System state - disable all](#system-state---disable-all)
+- [Bluetooth](#bluetooth)
+- [Sensors](#sensors)
+- [Keyring](#keyring)
+- [Nginx](#nginx)
+- [Rust](#rust)
+- [C#](#c)
+  - [INotify](#inotify)
+- [Python](#python)
+- [Bitwarden](#bitwarden)
+- [Microsoft signing key](#microsoft-signing-key)
+  - [VSCode](#vscode)
+  - [Edge](#edge)
+  - [Teams](#teams)
+- [Spotify](#spotify)
+- [RSync](#rsync)
+- [iPhone](#iphone)
+- [Bose quietcomfort 35](#bose-quietcomfort-35)
+  - [Getting mic to work with bluetooth](#getting-mic-to-work-with-bluetooth)
+- [Pulseaudio](#pulseaudio)
+- [Webcam](#webcam)
+- [Sound Blaster](#sound-blaster)
+  - [Pavucontrol / Pulse audio control](#pavucontrol--pulse-audio-control)
+  - [Alsamixer](#alsamixer)
+- [Node/npm](#nodenpm)
+- [Steam](#steam)
+- [Must have apps](#must-have-apps)
+  - [VLC](#vlc)
+  - [Screenshots](#screenshots)
+  - [OBS Recording/Streaming](#obs-recordingstreaming)
+  - [Gimp (image editor)](#gimp-image-editor)
+  - [Blender](#blender)
+  - [PrusaSlicer](#prusaslicer)
+  - [Openshot (video editor)](#openshot-video-editor)
+  - [Tor Browser](#tor-browser)
+  - [Kleopatra (GPG)](#kleopatra-gpg)
 
 ## General
 - Use LVM if unsure on sizes
@@ -80,6 +133,14 @@ sudo apt update
 sudo apt install linux-image-amd64 nvidia-driver firmware-misc-nonfree
 ```
 
+# flatpak
+- Lot of software is available in flatpak
+```bash
+# install flatpak
+sudo apt install flatpak
+# add flathub repo
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+```
 
 # System state - disable all but hibernate
 ```bash
@@ -194,11 +255,12 @@ sudo apt install teams
 ```
 
 # Spotify
-Current version has no font scaling so its kinda useless, better to use browser at the moment.
+Client is now better than browser, but check always first instructions from below.
+- Check [instructions(https://www.spotify.com/nl/download/linux/)]
 
 Signing key
 ```bash
-curl -sS https://download.spotify.com/debian/pubkey_7A3A762FAFD4A51F.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
+curl -sS https://download.spotify.com/debian/pubkey_C85668DF69375001.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
 ```
 
 Package source
@@ -374,6 +436,16 @@ flatpak install https://flathub.org/repo/appstream/org.gimp.GIMP.flatpakref
 ````bash
 sudo apt install -t bookworm-backports libheif1
 ````
+
+## Blender
+```bash
+flatpak install flathub org.blender.Blender
+```
+
+## PrusaSlicer
+```bash
+flatpak install flathub com.prusa3d.PrusaSlicer
+```
 
 ## Openshot (video editor)
 ```bash
