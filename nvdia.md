@@ -1,8 +1,109 @@
+
 # Simple installation notes
 - Downloading latest cuda driver `cuda_12.3.1_545.23.08_linux.run`
 - Downloading latest cuDNN `cudnn-linux-x86_64-8.9.7.29_cuda12-archive.tar.xz`
     - Extract into cudnn folder
 - There is no TensorRT for Cuda 12.3 atm
+
+## Own install cmd
+```bash
+sudo ~/cuda_12.6.3/cuda_12.6.3_560.35.05_linux.run --silent --driver --toolkit --override
+```
+
+## Cuda installer options
+- [Cuda installer docs](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/)
+
+Silent Installation
+
+--silent
+
+Required for any silent installation. Performs an installation with no further user-input and minimal command-line output based on the options provided below. Silent installations are useful for scripting the installation of CUDA. Using this option implies acceptance of the EULA. The following flags can be used to customize the actions taken during installation. At least one of --driver, --uninstall, and --toolkit must be passed if running with non-root permissions.
+
+--driver
+
+Install the CUDA Driver.
+
+--toolkit
+
+Install the CUDA Toolkit.
+
+--toolkitpath=<path>
+
+Install the CUDA Toolkit to the <path> directory. If not provided, the default path of /usr/local/cuda-12.6 is used.
+
+--defaultroot=<path>
+
+Install libraries to the <path> directory. If the <path> is not provided, then the default path of your distribution is used. This only applies to the libraries installed outside of the CUDA Toolkit path.
+
+Extraction
+
+--extract=<path>
+
+Extracts to the <path> the following: the driver runfile, the raw files of the toolkit to <path>.
+
+This is especially useful when one wants to install the driver using one or more of the command-line options provided by the driver installer which are not exposed in this installer.
+
+Overriding Installation Checks
+
+--override
+
+Ignores compiler, third-party library, and toolkit detection checks which would prevent the CUDA Toolkit from installing.
+
+No OpenGL Libraries
+
+--no-opengl-libs
+
+Prevents the driver installation from installing NVIDIA’s GL libraries. Useful for systems where the display is driven by a non-NVIDIA GPU. In such systems, NVIDIA’s GL libraries could prevent X from loading properly.
+
+No man pages
+
+--no-man-page
+
+Do not install the man pages under /usr/share/man.
+
+Overriding Kernel Source
+
+--kernel-source-path=<path>
+
+Tells the driver installation to use <path> as the kernel source directory when building the NVIDIA kernel module. Required for systems where the kernel source is installed to a non-standard location.
+
+Running nvidia-xconfig
+
+--run-nvidia-xconfig
+
+Tells the driver installation to run nvidia-xconfig to update the system X configuration file so that the NVIDIA X driver is used. The pre-existing X configuration file will be backed up.
+
+No nvidia-drm kernel module
+
+--no-drm
+
+Do not install the nvidia-drm kernel module. This option should only be used to work around failures to build or install the nvidia-drm kernel module on systems that do not need the provided features.
+
+Custom Temporary Directory Selection
+
+--tmpdir=<path>
+
+Performs any temporary actions within <path> instead of /tmp. Useful in cases where /tmp cannot be used (doesn’t exist, is full, is mounted with ‘noexec’, etc.).
+
+Kernel Module Build Directory
+
+--kernel-module-build-directory=<kernel|kernel-open>
+
+Tells the driver installation to use legacy or open flavor of kernel source when building the NVIDIA kernel module. The kernel-open flavor is only supported on Turing GPUs and newer.
+
+-m=kernel
+
+Tells the driver installation to use legacy flavor of kernel source when building the NVIDIA kernel module. Shorthand for --kernel-module-build-directory=kernel
+
+m=kernel-open
+
+Tells the driver installation to use open flavor of kernel source when building the NVIDIA kernel module. The kernel-open flavor is only supported on Turing GPUs and newer. Shorthand for --kernel-module-build-directory=kernel-open
+
+## Cuda installer - uninstaller
+
+```bash
+sudo /usr/local/cuda-12.6/bin/cuda-uninstaller
+```
 
 ## Bug
 - https://lists.debian.org/debian-stable-announce/2024/02/msg00002.html
