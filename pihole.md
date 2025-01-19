@@ -1,8 +1,19 @@
-# Homepage
-- https://github.com/pi-hole/pi-hole
+# Sites
+- [Homepage](https://github.com/pi-hole/pi-hole)
+- [Repo](https://github.com/pi-hole/pi-hole/#one-step-automated-install)
+
+# Install
+```bash
+git clone --depth 1 https://github.com/pi-hole/pi-hole.git Pi-hole
+cd "Pi-hole/automated install/"
+sudo bash basic-install.sh
+```
 
 # Local network
 - See in bitwarden
+
+# Teleporter
+- Use settings Teleporter to backup and restore settings.
 
 ## Blacklist
 - nelonenmedia-pmd-ads-spotgate.nm-stream.nelonenmedia.fi

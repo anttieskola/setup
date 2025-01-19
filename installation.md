@@ -79,6 +79,7 @@
 - [ssh.md](./ssh.md)
 - [utilities.md](./utilities.md)
 - [wordpress.md](./wordpress.md)
+- [neofetch.md](./neofetch.md)
 
 ## General
 - Use LVM if unsure on sizes
@@ -164,7 +165,7 @@ sudo apt install linux-image-amd64 nvidia-driver firmware-misc-nonfree
 # install flatpak
 sudo apt install flatpak
 # add flathub repo
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 ```
 
 # System state - disable all but hibernate
