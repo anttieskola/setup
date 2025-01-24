@@ -117,23 +117,28 @@ deb-src http://security.debian.org/debian-security stable-security main
 
 ## General
 - Use LVM if unsure on sizes
+- Recommended filesystem types:
+  - /var: XFS (good for databases/logs)
+  - /home: EXT4 (general purpose)
 
 ## Partitioning used
 - 512MB EFI (bootable)
 - 512MB EXT2 /boot
 - swap if used
 - / (root) 16GB...128GB
-  - space requirement depends whats required to run and other partitions
-  - Note, Cuda + TensorRT uses 16GB+ space (more than base system + kde)
+  - space requirement depends whats installed
+  - Note: Cuda + TensorRT uses 16GB+ space
 - /var (nginx, postgresql)
+  - Recommended: 20GB minimum
+  - Increase if heavy logging/database usage
 - /home (mostly everything is here)
+  - Recommended: 50% or more of total space
 
 ## Swap
-- For hibernation 1,5 x RAM
-  - i.e. 1,5 * 64GB = 96GB
-- No swap if running Redis
-  - Any amount can mess it up
-- TODO: Heard there is some benefit having 1GB swap on large ram systems, can't remember about it
+- For hibernation: RAM size + 2GB
+  - Example: 64GB RAM = 66GB swap
+- No swap if running Redis (can cause performance issues)
+- Small swap (2GB) recommended even with large RAM for memory pressure handling
 
 ## Encryption (laptop)
 - /dev/sda1 512MB EFI (bootable)
