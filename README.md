@@ -15,11 +15,13 @@ This repository contains notes on my personal server/workstation/rasbpi/... inst
 - [kde](/kde.md)
 
 # Software/Service
+- [copilot](/copilot.md)
 - [nvidia](/nvdia.md)
 - [nginx](/nginx.md)
 - [Let's encrypt](/letsencrypt.md)
 - [redis](/redis.md)
 - [firewall](/firewall.md)
+- [wordpress.md](./wordpress.md)
 - TODO: [postgresql](./postgresql.md)
 - TODO: [kubernetes](./kubernetes.md)
 
@@ -58,4 +60,3 @@ This repository contains notes on my personal server/workstation/rasbpi/... inst
 - [samba.md](./samba.md)
 - [ssh.md](./ssh.md)
 - [utilities.md](./utilities.md)
-- [wordpress.md](./wordpress.md)

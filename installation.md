@@ -54,6 +54,7 @@
   - [Kleopatra (GPG)](#kleopatra-gpg)
 
 # Other notes
+- [copilot.md](./copilot.md)
 - [cpu.md](./cpu.md)
 - [crypt.md](./crypt.md)
 - [crypt_fs.md](./crypt_fs.md)
