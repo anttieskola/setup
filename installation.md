@@ -1,8 +1,6 @@
-# DistroHop / Fresh install
-- Notes for myself when installing or updating some nix box
-- Current environment bookworm on Debian & Raspberry Pi OS
-
 # Table of Contents
+- [Update](#update)
+  - [Sources.list](#sourceslist)
 - [DistroHop / Fresh install](#distrohop--fresh-install)
   - [General](#general)
   - [Partitioning used](#partitioning-used)
@@ -80,6 +78,41 @@
 - [utilities.md](./utilities.md)
 - [wordpress.md](./wordpress.md)
 - [neofetch.md](./neofetch.md)
+
+# Update
+```bash
+# Basic update
+sudo apt update
+sudo apt full-upgrade
+
+# Flatpak
+sudo flatpak update
+
+# Nvidia - check cuda installer for latest driver
+```
+
+## Sources.list
+```ini
+# debian (fi-mirror)
+deb http://www.nic.funet.fi/debian/ bookworm main contrib non-free non-free-firmware
+deb-src http://www.nic.funet.fi/debian/ bookworm main contrib non-free non-free-firmware
+
+# debian
+deb http://deb.debian.org/debian/ bookworm-updates main non-free contrib non-free-firmware
+deb-src http://deb.debian.org/debian/ bookworm-updates main non-free contrib non-free-firmware
+
+# backports
+deb http://deb.debian.org/debian bookworm-backports main contrib non-free non-free-firmware
+deb-src http://deb.debian.org/debian/ bookworm-backports main contrib non-free non-free-firmware
+
+# security
+deb http://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware
+deb-src http://security.debian.org/debian-security stable-security main
+```
+
+# DistroHop / Fresh install
+- Notes for myself when installing or updating some nix box
+- Current environment bookworm on Debian & Raspberry Pi OS
 
 ## General
 - Use LVM if unsure on sizes
