@@ -33,7 +33,7 @@ sudo flatpak --system remote-add --if-not-exists flathub https://flathub.org/rep
 ```bash
 sudo flatpak install flathub org.blender.Blender -y && \
 sudo flatpak install flathub org.gimp.GIMP -y && \
-sudo flatpak install flathub org.prusa-labs.PrusaSlicer -y
+sudo flatpak install flathub com.prusa3d.PrusaSlicer -y
 ```
 ## Blender - 3D modeling
 [homepage](https://www.blender.org/)
