@@ -13,17 +13,14 @@
 - [Basic stuff](#basic-stuff)
 - [Kernel stuff](#kernel-stuff)
 - [AMD](#amd)
-- [ONLY NVidia driver](#only-nvidia-driver)
-- [flatpak](#flatpak)
 - [System state - disable all but hibernate](#system-state---disable-all-but-hibernate)
 - [System state - disable all](#system-state---disable-all)
 - [Bluetooth](#bluetooth)
 - [Sensors](#sensors)
 - [Keyring](#keyring)
-- [Nginx](#nginx)
-- [Rust](#rust)
 - [C#](#c)
   - [INotify](#inotify)
+- [Rust](#rust)
 - [Python](#python)
 - [Bitwarden](#bitwarden)
 - [Microsoft signing key](#microsoft-signing-key)
@@ -42,43 +39,9 @@
   - [Alsamixer](#alsamixer)
 - [Node/npm](#nodenpm)
 - [Steam](#steam)
-- [Must have apps](#must-have-apps)
-  - [VLC](#vlc)
-  - [Screenshots](#screenshots)
-  - [OBS Recording/Streaming](#obs-recordingstreaming)
-  - [Gimp (image editor)](#gimp-image-editor)
-  - [Blender](#blender)
-  - [PrusaSlicer](#prusaslicer)
-  - [Openshot (video editor)](#openshot-video-editor)
-  - [Tor Browser](#tor-browser)
-  - [Kleopatra (GPG)](#kleopatra-gpg)
+- [Nginx](#nginx)
+- [Must have non apt apps](#must-have-non-apt-apps)
 
-# Other notes
-- [copilot.md](./copilot.md)
-- [cpu.md](./cpu.md)
-- [crypt.md](./crypt.md)
-- [crypt_fs.md](./crypt_fs.md)
-- [firewall.md](./firewall.md)
-- [git.md](./git.md)
-- [kde.md](./kde.md)
-- [kubernetes.md](./kubernetes.md)
-- [letsencrypt.md](./letsencrypt.md)
-- [nginx.md](./nginx.md)
-- [nmcli.md](./nmcli.md)
-- [nvdia.md](./nvdia.md)
-- [other/moving_boot.md](./other/moving_boot.md)
-- [other/networkmanager.md](./other/networkmanager.md)
-- [other/new_zeus.md](./other/new_zeus.md)
-- [pihole.md](./pihole.md)
-- [postgresql.md](./postgresql.md)
-- [raspberrys.md](./raspberrys.md)
-- [README.md](./README.md)
-- [redis.md](./redis.md)
-- [samba.md](./samba.md)
-- [ssh.md](./ssh.md)
-- [utilities.md](./utilities.md)
-- [wordpress.md](./wordpress.md)
-- [neofetch.md](./neofetch.md)
 
 # Update
 ```bash
@@ -189,24 +152,6 @@ sudo apt install isenkram
 sudo isenkram-autoinstall-firmware
 ```
 
-# ONLY NVidia driver
-- [See these instructions for AI/Cuda stuff](./nvidia.md)
-
-Installation directly from debian repo (won't work with AI/Cuda stuff)
-```bash
-sudo apt update
-sudo apt install linux-image-amd64 nvidia-driver firmware-misc-nonfree
-```
-
-# flatpak
-- Lot of software is available in flatpak
-```bash
-# install flatpak
-sudo apt install flatpak
-# add flathub repo
-flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-```
-
 # System state - disable all but hibernate
 ```bash
 sudo systemctl mask sleep.target suspend.target hybrid-sleep.target
@@ -231,9 +176,46 @@ sudo apt install lm-sensors psensor
 sudo apt install gnome-keyring libqt5keychain1
 ```
 
-# Nginx
+# C#
+Installed in home/path (backup), just recreate symlink dotnet -> dotnetX
+
+- INotify
+Can add the following to `.bash_aliases` to prevent all config file watching
 ```bash
-sudo apt install nginx-full
+export DOTNET_USE_POLLING_FILE_WATCHER=true
+```
+
+# Bash .bash_aliases
+```bash
+ ~/.bashrc: executed by bash(1) for non-login shells.
+alias ll='ls -al'
+alias ssh-agent-online='eval "$(ssh-agent -s)"'
+alias pst='ps -auxwf'
+
+# nvidia -Cuda, -cuDNN, -TensorRT libs/binaries
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64/:/usr/local/TensorRT/lib
+export PATH=$PATH:/usr/local/cuda/bin:/usr/local/TensorRT/bin
+
+# own bin
+export PATH=$PATH:~/bin/
+
+# dotnet
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
+export DOTNET_ROOT=$HOME/dotnet
+export PATH=$PATH:$HOME/dotnet
+
+# add to .bash_aliases, globally installed dotnet tools
+export PATH=$PATH:$HOME/.dotnet/tools
+
+# inotiyfy instance issue https://github.com/dotnet/aspnetcore/issues/8449
+export DOTNET_USE_POLLING_FILE_WATCHER=true
+
+# Java home
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+# Sonar home
+export SONAR_HOME=/usr/local/bin/sonarqube
+# Sonar path
+export PATH=$PATH:$SONAR_HOME/bin/linux-x86-64
 ```
 
 # Rust
@@ -242,81 +224,42 @@ No need if using home backup where it is installed
 curl --proto '=https' --tlsv1.3 -sSf https://sh.rustup.rs | sh
 ```
 
-# C#
-Installed in home/path (backup), just recreate symlink dotnet -> dotnetX
-
-## INotify
-Can add the following to `.bash_aliases` to prevent all config file watching
-```bash
-export DOTNET_USE_POLLING_FILE_WATCHER=true
-```
-
 Can add the following to `/etc/sysctl.conf` increase the limit of amount files to be watched
 ```bash
 fs.inotify.max_user_watches=524288
 ```
-
-# Python
+# Spectacle (Screenshots)
 ```bash
-# not found in bookworm anymore
-# sudo apt autoremove python2
+sudo apt install kde-spectacle
 ```
+
+# Tor Browser
+```bash
+sudo apt install torbrowser-launcher
+```
+
+# Kleopatra (GPG)
+```bash
+sudo apt install kleopatra
+```
+
+# Python 3
 
 ```bash
 sudo apt install python3 python3-pip
 sudo apt install python3-numpy python3-torch
 ```
 
+## VLC
+```bash
+sudo apt install vlc
+```
+
 # Bitwarden
+You have to manually update every about 3..6 months
 Download: https://bitwarden.com/download/
 ```bash
 sudo dpkg -i Bitwarden-XXX-amd64.deb
-```
-
-# Microsoft signing key
-```bash
-curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
-sudo install -o root -g root -m 644 microsoft.gpg /usr/share/keyrings/
-rm microsoft.gpg
-```
-
-## VSCode
-Set package source
-```bash
-sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
-```
-Install either
-```bash
-sudo apt install code
-```
-```bash
-sudo apt install code-insiders
-```
-
-## Edge
-Set package source
-```bash
-sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" > /etc/apt/sources.list.d/microsoft-edge-beta.list'
-```
-
-Beta updates every 4 weeks, dev every week.
-Install either
-```bash
-sudo apt install microsoft-edge-beta
-```
-```bash
-sudo apt install microsoft-edge-dev
-```
-## Teams
-Set package source
-```bash
-# this seems to be the correct one
-sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/ms-teams stable main" > /etc/apt/sources.list.d/teams.list'
-
-# but all sources are zero so it has been used but somehow wiped content...
-# 13-Nov-2023 16:08 all files from repo have been wiped
-sudo apt update
-sudo apt install teams
 ```
 
 # Spotify
@@ -412,8 +355,6 @@ Source #8
                 pcm
 ```
 
-
-
 # Webcam
 ```bash
 sudo apt install cheese
@@ -466,63 +407,61 @@ sudo apt --fix-broken install
 # after this you can install nvidia cuda, cudnn & tensort...
 ```
 
-# Must have apps
-
-## VLC
+# Nginx
 ```bash
-sudo apt install vlc
+sudo apt install nginx-full
 ```
 
-## Screenshots
+# Microsoft
+- ***Microsoft changes everything all the time***
+- Always check for latest...
+
+## Microsoft signing key
 ```bash
-sudo apt install kde-spectacle
+curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+sudo install -o root -g root -m 644 microsoft.gpg /usr/share/keyrings/
+rm microsoft.gpg
 ```
 
-## OBS Recording/Streaming
+## VSCode
+Set package source
 ```bash
-sudo apt install obs-studio
+sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
+```
+Install either
+```bash
+sudo apt install code
+```
+```bash
+sudo apt install code-insiders
 ```
 
-## Gimp (image editor)
-This will fix issues with heif files with the latest iPhone
-
-1. Remove GIMP if installed from apt
-````bash
-sudo apt remove gimp
-sudo apt autoremove
-````
-
-2. Install latest from flatpak
-````bash
-flatpak install https://flathub.org/repo/appstream/org.gimp.GIMP.flatpakref
-````
-
-3. Install backport (updated version of libheif)
-````bash
-sudo apt install -t bookworm-backports libheif1
-````
-
-## Blender
+## Edge
+Set package source
 ```bash
-flatpak install flathub org.blender.Blender
+sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" > /etc/apt/sources.list.d/microsoft-edge-beta.list'
 ```
 
-## PrusaSlicer
+Beta updates every 4 weeks, dev every week.
+Install either
 ```bash
-flatpak install flathub com.prusa3d.PrusaSlicer
+sudo apt install microsoft-edge-beta
+```
+```bash
+sudo apt install microsoft-edge-dev
 ```
 
-## Openshot (video editor)
+## Teams
+Set package source
 ```bash
-sudo apt install openshot-qt
+# this seems to be the correct one
+sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/ms-teams stable main" > /etc/apt/sources.list.d/teams.list'
+
+# but all sources are zero so it has been used but somehow wiped content...
+# 13-Nov-2023 16:08 all files from repo have been wiped
+sudo apt update
+sudo apt install teams
 ```
 
-## Tor Browser
-```bash
-sudo apt install torbrowser-launcher
-```
-
-## Kleopatra (GPG)
-```bash
-sudo apt install kleopatra
-```
+# Must have non apt apps
+- [See software.md](./software.md)

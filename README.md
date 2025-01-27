@@ -1,6 +1,7 @@
 This repository contains notes on my personal server/workstation/rasbpi/... installations and the setup of software into those i.e. postgresql, nginx, redis...
 
 - [Host installation](/installation.md)
+- [software](/software.md)
 - [utilities](/utilities.md)
 - [inspect issues](/inspect_issues.md)
 
@@ -55,6 +56,7 @@ This repository contains notes on my personal server/workstation/rasbpi/... inst
 - [pihole.md](./pihole.md)
 - [postgresql.md](./postgresql.md)
 - [raspberrys.md](./raspberrys.md)
+- [software.md](./software.md)
 - [README.md](./README.md)
 - [redis.md](./redis.md)
 - [samba.md](./samba.md)
