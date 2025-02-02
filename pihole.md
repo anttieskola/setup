@@ -23,6 +23,7 @@ sudo bash basic-install.sh
 sudo systemctl status
 # use top, then Shift+M to see what is using memory
 top
+# system should use under 1GB of memory when running...
 ```
 # Local network
 - See in bitwarden
