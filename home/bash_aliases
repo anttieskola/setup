@@ -43,9 +43,4 @@ eval "$(ssh-agent -s)"
 # tokens
 source .bash_tokens
 
-# Neofetch
-if [[ $- == *i* ]]; then
-    echo
-    neofetch
-fi
-
+# Neofetch (use global)
