@@ -1,0 +1,46 @@
+# Copy this to your home dir as .bash_aliases
+# Create also file .bash_tokens to set 'secret' environment variables
+
+# ~/.bashrc: executed by bash(1) for non-login shells.
+alias ll='ls -al'
+alias pst='ps -auxwf'
+
+# nvidia -Cuda, -cuDNN, -TensorRT libs/binaries (needs install cuda + TensorRT)
+# comment if machine missing RTX card
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64/:/usr/local/TensorRT/lib
+export PATH=$PATH:/usr/local/cuda/bin:/usr/local/TensorRT/bin
+
+# own bin
+export PATH=$PATH:~/bin/
+
+# dotnet
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
+export DOTNET_ROOT=$HOME/dotnet
+export PATH=$PATH:$HOME/dotnet
+
+# add to .bash_aliases, globally installed dotnet tools
+export PATH=$PATH:$HOME/.dotnet/tools
+
+# inotiyfy instance issue https://github.com/dotnet/aspnetcore/issues/8449
+export DOTNET_USE_POLLING_FILE_WATCHER=true
+
+# Java home (needs install)
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+
+# Sonar home (needs install)
+export SONAR_HOME=/usr/local/bin/sonarqube
+# Sonar path
+export PATH=$PATH:$SONAR_HOME/bin/linux-x86-64
+
+# ssh agent
+eval "$(ssh-agent -s)"
+
+# tokens
+source .bash_tokens
+
+# Neofetch
+if [[ $- == *i* ]]; then
+    echo
+    neofetch
+fi
+

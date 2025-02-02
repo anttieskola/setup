@@ -1,0 +1,20 @@
+#!/bin/bash
+if [ -z $HUGGING_FACE_TOKEN ]; then
+    # no environment variable set for accessing hugging face
+    echo -e "\e[31mError: HUGGING_FACE_TOKEN environment variable must be set for your access token\e[0m"
+elif [ -z "${1+xxx}" ]; then
+    # no parameter, show usage
+    echo -e "\e[31mError: Usage: $0 huggingface-model-url\e[0m"
+else
+    # create log file name, usign models name
+    logfilename="wget-${1##*/}.txt"
+    echo -e "\e[32m#### Download will run fully on background, you can logout #####\e[0m"
+    echo -e "\e[34m#### Download logfilename: $logfilename\e[0m"
+    # start download
+    nohup wget --continue --background --output-file=$logfilename --header="Authorization: Bearer $HUGGING_FACE_TOKEN" $1 > /dev/null 2>&1 &
+    # wait and show log content
+    echo -e "\e[32m#### Download started...waiting...few...seconds...\e[0m"
+    sleep 3
+    echo -e "\e[34m#### Download logfile content:\e[0m"
+    more $logfilename
+fi
