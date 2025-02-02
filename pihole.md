@@ -9,6 +9,21 @@ cd "Pi-hole/automated install/"
 sudo bash basic-install.sh
 ```
 
+# config.txt
+- Comment/disable audio
+- Comment arm boost, so it won't overclock itself
+
+# If using LAN
+- You can disable services
+  - wpa_supplicant.service
+  - ...
+
+```bash
+# use to see what services are on
+sudo systemctl status
+# use top, then Shift+M to see what is using memory
+top
+```
 # Local network
 - See in bitwarden
 
