@@ -32,6 +32,11 @@ export SONAR_HOME=/usr/local/bin/sonarqube
 # Sonar path
 export PATH=$PATH:$SONAR_HOME/bin/linux-x86-64
 
+# node (needs install)
+export PATH=$PATH:/usr/local/node/bin
+# android studio (needs install)
+export PATH=$PATH:~/android/studio/bin
+
 # ssh agent
 eval "$(ssh-agent -s)"
 
