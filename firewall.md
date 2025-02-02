@@ -7,8 +7,18 @@
 sudo apt install ufw
 
 # sudo ufw allow <port number>/<optional protocol>
-# sudo ufw disable
-# sudo ufw enable
+
+# example of pihole
+sudo ufw allow ssh
+sudo ufw allow dns
+sudo ufw allow http
+sudo ufw allow https
+
+# then just enable (right away + systemd)
+sudo ufw enable
+
+# if you must disable
+sudo ufw disable
 ````
 
 ## TCP
