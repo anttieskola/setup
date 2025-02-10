@@ -1,7 +1,8 @@
 # Table of Contents
+
 - [Update](#update)
   - [Sources.list](#sourceslist)
-  - [Firewall](#Firewall)
+  - [Firewall](#firewall)
 - [DistroHop / Fresh install](#distrohop--fresh-install)
   - [General](#general)
   - [Partitioning used](#partitioning-used)
@@ -9,8 +10,6 @@
   - [Encryption (laptop)](#encryption-laptop)
 - [User: antti](#user-antti)
 - [Login/Boot method](#loginboot-method)
-  - [Console login](#console-login)
-  - [Graphical login](#graphical-login)
 - [Basic stuff](#basic-stuff)
 - [Kernel stuff](#kernel-stuff)
 - [AMD](#amd)
@@ -19,10 +18,12 @@
 - [Bluetooth](#bluetooth)
 - [Sensors](#sensors)
 - [Keyring](#keyring)
-- [C#](#c)
-  - [INotify](#inotify)
+- [Csharp](#csharp)
+- [JAVA](#java)
+- [SonarQube](#sonarqube)
+- [NodeJS](#nodejs)
 - [Rust](#rust)
-- [Python](#python)
+- [Python](#python 3)
 - [Bitwarden](#bitwarden)
 - [Microsoft signing key](#microsoft-signing-key)
   - [VSCode](#vscode)
@@ -38,13 +39,12 @@
 - [Sound Blaster](#sound-blaster)
   - [Pavucontrol / Pulse audio control](#pavucontrol--pulse-audio-control)
   - [Alsamixer](#alsamixer)
-- [Node/npm](#nodenpm)
 - [Steam](#steam)
 - [Nginx](#nginx)
 - [Must have non apt apps](#must-have-non-apt-apps)
 
-
 # Update
+
 ```bash
 # Basic update
 sudo apt update
@@ -57,6 +57,7 @@ sudo flatpak update
 ```
 
 ## Sources.list
+
 ```ini
 # debian (fi-mirror)
 deb http://www.nic.funet.fi/debian/ bookworm main contrib non-free non-free-firmware
@@ -74,21 +75,26 @@ deb-src http://deb.debian.org/debian/ bookworm-backports main contrib non-free n
 deb http://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware
 deb-src http://security.debian.org/debian-security stable-security main
 ```
+
 # Firewall
+
 - Set firewall using UFW - Uncomplicated Firewall, its super easy
 - [Notes](./firewall.md)
 
 # DistroHop / Fresh install
+
 - Notes for myself when installing or updating some nix box
 - Current environment bookworm on Debian & Raspberry Pi OS
 
 ## General
+
 - Use LVM if unsure on sizes
 - Recommended filesystem types:
   - /var: XFS (good for databases/logs)
   - /home: EXT4 (general purpose)
 
 ## Partitioning used
+
 - 512MB EFI (bootable)
 - 512MB EXT2 /boot
 - swap if used
@@ -102,12 +108,14 @@ deb-src http://security.debian.org/debian-security stable-security main
   - Recommended: 50% or more of total space
 
 ## Swap
+
 - For hibernation: RAM size + 2GB
   - Example: 64GB RAM = 66GB swap
 - No swap if running Redis (can cause performance issues)
 - Small swap (2GB) recommended even with large RAM for memory pressure handling
 
 ## Encryption (laptop)
+
 - /dev/sda1 512MB EFI (bootable)
 - /dev/sda2 512MB /boot ext2
 - /dev/sda3 dm-crypt (physical device for encryption)
@@ -122,81 +130,52 @@ I made this because it required to have EFI & /boot unencrypted. There I guess i
 - TODO: Figure out how you could reinstall diff distro on encrypted setup
 
 # User: antti
+
 Should have
+
 - id: 1000
 - gid: 1000
 
 # Login/Boot method
+
 Console login
+
 ```bash
 sudo systemctl set-default multi-user.target
 sudo systemctl reboot
 ```
 
 Graphical login
+
 ```bash
 sudo systemctl set-default graphical.target
 sudo systemctl reboot
 ```
 
 # Basic stuff
+
 ```bash
 sudo apt install git git-lfs make gcc tcl libssl-dev libsystemd-dev libc6 libgcc-s1 libstdc++6 zlib1g ca-certificates apt-transport-https libfreeimage3 libfreeimage-dev curl cpulimit neofetch smartmontools
 ```
 
 # Kernel stuff
+
 ```bash
 sudo apt install linux-image-amd64 linux-headers-amd64 linux-source
 ```
 
-# AMD
-- use isenkram to install any missing firmware
-```bash
-sudo apt install isenkram
-sudo isenkram-autoinstall-firmware
-```
+# Bash (.bash_aliases)
 
-# System state - disable all but hibernate
 ```bash
-sudo systemctl mask sleep.target suspend.target hybrid-sleep.target
-```
-# System state - disable all
-```bash
-# keep hibernate.target
-sudo systemctl mask sleep.target suspend.target  hybrid-sleep.target
-```
+# Copy this to your home dir as .bash_aliases
+# Create also file .bash_tokens to set 'secret' environment variables
 
-# Bluetooth
-```bash
-sudo apt install bluez bluetooth
-```
-# Sensors
-```bash
-sudo apt install lm-sensors psensor
-```
-
-# Keyring
-```bash
-sudo apt install gnome-keyring libqt5keychain1
-```
-
-# C#
-Installed in home/path (backup), just recreate symlink dotnet -> dotnetX
-
-- INotify
-Can add the following to `.bash_aliases` to prevent all config file watching
-```bash
-export DOTNET_USE_POLLING_FILE_WATCHER=true
-```
-
-# Bash .bash_aliases
-```bash
- ~/.bashrc: executed by bash(1) for non-login shells.
+# ~/.bashrc: executed by bash(1) for non-login shells.
 alias ll='ls -al'
-alias ssh-agent-online='eval "$(ssh-agent -s)"'
 alias pst='ps -auxwf'
 
-# nvidia -Cuda, -cuDNN, -TensorRT libs/binaries
+# nvidia -Cuda, -cuDNN, -TensorRT libs/binaries (needs install cuda + TensorRT)
+# comment if machine missing RTX card
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64/:/usr/local/TensorRT/lib
 export PATH=$PATH:/usr/local/cuda/bin:/usr/local/TensorRT/bin
 
@@ -214,35 +193,189 @@ export PATH=$PATH:$HOME/.dotnet/tools
 # inotiyfy instance issue https://github.com/dotnet/aspnetcore/issues/8449
 export DOTNET_USE_POLLING_FILE_WATCHER=true
 
-# Java home
-export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
-# Sonar home
-export SONAR_HOME=/usr/local/bin/sonarqube
-# Sonar path
+# export java home
+export JAVA_HOME=/usr/local/java
+# export java path to bin
+export PATH=$PATH:$JAVA_HOME/bin
+
+# Add/modify SONAR_HOME and PATH
+export SONAR_HOME=/usr/local/sonarqube
+export PATH=$PATH:$SONAR_HOME/bin/linux-x86-64
+
+# Add/modify NODE_HOME and PATH
+export NODE_HOME=/usr/local/node
+export PATH=$PATH:$NODE_HOME/bin
+
+# ssh agent
+eval "$(ssh-agent -s)"
+
+# tokens
+source .bash_tokens
+
+# Neofetch (use global)
+```
+
+# AMD
+
+- use isenkram to install any missing firmware
+
+```bash
+sudo apt install isenkram
+sudo isenkram-autoinstall-firmware
+```
+
+# System state - disable all but hibernate
+
+```bash
+sudo systemctl mask sleep.target suspend.target hybrid-sleep.target
+```
+
+# System state - disable all
+
+```bash
+# keep hibernate.target
+sudo systemctl mask sleep.target suspend.target  hybrid-sleep.target
+```
+
+# Bluetooth
+
+```bash
+sudo apt install bluez bluetooth
+```
+
+# Sensors
+
+```bash
+sudo apt install lm-sensors psensor
+```
+
+# Keyring
+
+```bash
+sudo apt install gnome-keyring libqt5keychain1
+```
+
+# Csharp
+
+- Installed in home/path (backup), just recreate symlink dotnet -> dotnetX
+- Added path to .bash_aliases
+
+# JAVA
+
+Purged APT packages
+'''text
+default-jdk/stable,now 2:1.17-74 amd64 [installed]
+default-jdk-headless/stable,now 2:1.17-74 amd64 [installed,automatic]
+default-jre/stable,now 2:1.17-74 amd64 [installed,automatic]
+default-jre-headless/stable,now 2:1.17-74 amd64 [installed,automatic]
+openjdk-17-jdk/stable-security,now 17.0.14+7-1~deb12u1 amd64 [installed,automatic]
+openjdk-17-jdk-headless/stable-security,now 17.0.14+7-1~deb12u1 amd64 [installed,automatic]
+openjdk-17-jre/stable-security,now 17.0.14+7-1~deb12u1 amd64 [installed,automatic]
+openjdk-17-jre-headless/stable-security,now 17.0.14+7-1~deb12u1 amd64 [installed,automatic]
+
+```
+
+- Purge
+
+```bash
+sudo apt purge default-jdk default-jdk-headless default-jre default-jre-headless openjdk-17-jdk openjdk-17-jdk-headless openjdk-17-jre openjdk-17-jre-headless
+# shame on pdftk
+# default-jdk* default-jdk-headless* default-jre* default-jre-headless* openjdk-17-jdk*
+# openjdk-17-jdk-headless* openjdk-17-jre* openjdk-17-jre-headless* pdftk* pdftk-java
+sudo apt autoremove
+# bye bye for many packages, not sure will this break something...
+```
+
+- Get latest version from [adoptium](https://adoptium.net/)
+- Just first extract package to Downloads, this will create name like 'jdk-21.0.6+7'
+- Then move the folder as sudo to /usr/local/
+- Then create symlink to the folder named /usr/local/java
+
+```bash
+# Move and create/update symlink
+sudo mv ~/Downloads/jdk-21.0.6+7 /usr/local/
+sudo ln -s /usr/local/jdk-21.0.6+7 /usr/local/java
+```
+
+- Then modify .bash_aliases
+
+```bash
+# Add/modify JAVA_HOME and PATH
+export JAVA_HOME=/usr/local/java
+export PATH=$PATH:$JAVA_HOME/bin
+```
+
+# SonarQube
+
+- Download community version from [sonarqube](https://www.sonarsource.com/)
+- Just first extract package to Downloads, this will create name like 'sonarqube-25.2.0.102705'
+- Then move the folder as sudo to /usr/local/
+- Then create symlink to the folder named /usr/local/sonarqube
+
+```bash
+# Move and create/update symlink
+sudo mv ~/Downloads/sonarqube-25.2.0.102705 /usr/local/
+sudo ln -s /usr/local/sonarqube-25.2.0.102705 /usr/local/sonarqube
+```
+
+- Then modify .bash_aliases
+
+```bash
+# Add/modify SONAR_HOME and PATH
+export SONAR_HOME=/usr/local/sonarqube
 export PATH=$PATH:$SONAR_HOME/bin/linux-x86-64
 ```
 
+# NodeJS
+
+- Download latest version from [nodejs](https://nodejs.org/en/)
+  - Download prebuild version for linux X64
+- Just first extract package to Downloads, this will create name like 'node-v22.13.1-linux-x64'
+- Then move the folder as sudo to /usr/local/
+- Then create symlink to the folder named /usr/local/node
+
+```bash
+# Move and create/update symlink
+sudo mv ~/Downloads/node-v22.13.1-linux-x64 /usr/local/
+sudo ln -s /usr/local/node-v22.13.1-linux-x64 /usr/local/node
+```
+
+- Then modify .bash_aliases
+
+```bash
+# Add/modify NODE_HOME and PATH
+export NODE_HOME=/usr/local/node
+export PATH=$PATH:$NODE_HOME/bin
+```
+
 # Rust
+
 No need if using home backup where it is installed
+
 ```bash
 curl --proto '=https' --tlsv1.3 -sSf https://sh.rustup.rs | sh
 ```
 
 Can add the following to `/etc/sysctl.conf` increase the limit of amount files to be watched
+
 ```bash
 fs.inotify.max_user_watches=524288
 ```
+
 # Spectacle (Screenshots)
+
 ```bash
 sudo apt install kde-spectacle
 ```
 
 # Tor Browser
+
 ```bash
 sudo apt install torbrowser-launcher
 ```
 
 # Kleopatra (GPG)
+
 ```bash
 sudo apt install kleopatra
 ```
@@ -255,27 +388,34 @@ sudo apt install python3-numpy python3-torch
 ```
 
 ## VLC
+
 ```bash
 sudo apt install vlc
 ```
 
 # Bitwarden
+
 You have to manually update every about 3..6 months
-Download: https://bitwarden.com/download/
+Download: <https://bitwarden.com/download/>
+
 ```bash
 sudo dpkg -i Bitwarden-XXX-amd64.deb
 ```
 
 # Spotify
+
 Client is now better than browser, but check always first instructions from below.
+
 - Check [instructions(https://www.spotify.com/nl/download/linux/)]
 
 Signing key
+
 ```bash
 curl -sS https://download.spotify.com/debian/pubkey_C85668DF69375001.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
 ```
 
 Package source
+
 ```bash
 echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
 ```
@@ -285,7 +425,9 @@ sudo apt install spotify-client
 ```
 
 # RSync
+
 Use rsync to copy/move stuff between hosts
+
 ```bash
 # a == archive mode; equals -rlptgoD
 # v == verbose
@@ -294,6 +436,7 @@ rsync -av Downloads/* antti@god:~/Downloads/
 ```
 
 # iPhone
+
 ```bash
 # required tools
 sudo apt install libimobiledevice6 libimobiledevice-utils ifuse
@@ -311,23 +454,29 @@ fusermount -u /media/iphone
 # Bose quietcomfort 35
 
 ## Getting mic to work with bluetooth
+
 - modify file `/etc/pulse/default.pa`
+
 ```conf
 # modify line
 load-module module-bluetooth-policy
 # to
 load-module module-bluetooth-policy auto_switch=2
 ```
+
 - restart pulseaudio & xServer
 
 # Pulseaudio
+
 - [Pulseaudio systemtray](https://github.com/christophgysin/pasystray)
 - List available sources
+
 ```bash
 pactl list sources
 ```
 
 Example
+
 ```
 Source #8
         State: IDLE
@@ -360,38 +509,38 @@ Source #8
 ```
 
 # Webcam
+
 ```bash
 sudo apt install cheese
 ```
 
 # Sound Blaster
+
 - Most likely package: `firmware-misc-nonfree` has to be installed
-    - sound blaster has dsp
+  - sound blaster has dsp
 - I also downloaded [latest alsa-firmware](https://www.alsa-project.org/)
-    - configure, compile, install
-    - most likely useless and system already has this installed
+  - configure, compile, install
+  - most likely useless and system already has this installed
 - Install `alsa-utils` to get alsamixer where you can see devices and configure them
 - Install `pavucontrol` to configure pulseaudio in kde, pulseaudio runs on top of alsa
 
 ## Pavucontrol / Pulse audio control
+
 Configuration tab should include the device, when here you select profile it resets all settings
 which you can see in alsamixer (So after you get it working selecting new profile will break it).
 
 ![Pulse audio configuration tab](./pavucontrol.png)
 
 ## Alsamixer
+
 This is the tricky part as by default, I guess only optical is on as I did not hear any sound before accidentally hitting settings that made sound come out of the headphone/lineout jack.
 
 Pressing `m` you can enable/disable settings. When you see green `00` letters it means its on, `MM` means it's off. Here is a screenshot of the working settings (with all sound FX disabled).
 
 ![Alsamixer settings](./alsamixer.png)
 
-# Node/npm
-```bash
-sudo apt install nodejs npm
-```
-
 # Steam
+
 ***STEAM ACTUALLY RUNS EVEN THO UNINSTALLED ALL NVIDIA PACKAGES*** so on other machine installed debian nvidia driver, dependencies and got steam running. Purged all nvidia packages (including driver) to install driver using cuda installer, steam still runs after that.
 
 Has lot's of dependencies which be installed in progress, especially if no gnome installed from distro, but still there will be packages for sure.
@@ -412,15 +561,18 @@ sudo apt --fix-broken install
 ```
 
 # Nginx
+
 ```bash
 sudo apt install nginx-full
 ```
 
 # Microsoft
+
 - ***Microsoft changes everything all the time***
 - Always check for latest...
 
 ## Microsoft signing key
+
 ```bash
 curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
 sudo install -o root -g root -m 644 microsoft.gpg /usr/share/keyrings/
@@ -428,35 +580,46 @@ rm microsoft.gpg
 ```
 
 ## VSCode
+
 Set package source
+
 ```bash
 sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
 ```
+
 Install either
+
 ```bash
 sudo apt install code
 ```
+
 ```bash
 sudo apt install code-insiders
 ```
 
 ## Edge
+
 Set package source
+
 ```bash
 sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" > /etc/apt/sources.list.d/microsoft-edge-beta.list'
 ```
 
 Beta updates every 4 weeks, dev every week.
 Install either
+
 ```bash
 sudo apt install microsoft-edge-beta
 ```
+
 ```bash
 sudo apt install microsoft-edge-dev
 ```
 
 ## Teams
+
 Set package source
+
 ```bash
 # this seems to be the correct one
 sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/ms-teams stable main" > /etc/apt/sources.list.d/teams.list'
@@ -468,4 +631,5 @@ sudo apt install teams
 ```
 
 # Must have non apt apps
+
 - [See software.md](./software.md)
