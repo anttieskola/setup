@@ -23,7 +23,7 @@
 - [SonarQube](#sonarqube)
 - [NodeJS](#nodejs)
 - [Rust](#rust)
-- [Python](#python 3)
+- [Python](#Python)
 - [Bitwarden](#bitwarden)
 - [Microsoft signing key](#microsoft-signing-key)
   - [VSCode](#vscode)
@@ -380,7 +380,7 @@ sudo apt install torbrowser-launcher
 sudo apt install kleopatra
 ```
 
-# Python 3
+# Python
 
 ```bash
 sudo apt install python3 python3-pip
