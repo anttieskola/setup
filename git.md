@@ -16,7 +16,10 @@ Work same way as SSH login keys, we generate a key to be used like for example g
 Remember **not to use real email** address with public services. Like github documentation suggest using following format.
 
 ```bash
+# This only works with github
 ssh-keygen -t ed25519 -C "anttieskola@users.noreply.github.com"
+# Following works with Azure devops
+ssh-keygen -t rsa -b 4096 -C "antti.eskola@[insert-your-company-domain]"
 ```
 
 Add your new keys public part to the service you use it for.
