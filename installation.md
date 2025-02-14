@@ -324,6 +324,9 @@ sudo ln -s /usr/local/sonarqube-25.2.0.102705 /usr/local/sonarqube
 # Add/modify SONAR_HOME and PATH
 export SONAR_HOME=/usr/local/sonarqube
 export PATH=$PATH:$SONAR_HOME/bin/linux-x86-64
+# Create admin token (for all access)
+# Add/modify your .bash_tokens (all secret stuff goes there)
+export SONAR_TOKEN=[your admin token]
 ```
 
 # NodeJS
