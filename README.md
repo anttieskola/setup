@@ -1,11 +1,12 @@
+
+# Basic things
+
 This repository contains notes on my personal server/workstation/rasbpi/... installations and the setup of software into those i.e. postgresql, nginx, redis...
 
 - [Host installation](/installation.md)
 - [software](/software.md)
 - [utilities](/utilities.md)
 - [inspect issues](/inspect_issues.md)
-
-# Basic things
 - [ssh](/ssh.md)
 - [git](/git.md)
 - [samba](/samba.md)
@@ -13,11 +14,14 @@ This repository contains notes on my personal server/workstation/rasbpi/... inst
 - [encrypted storage](/crypt.md)
 
 # Desktop environments
+
 - [kde](/kde.md)
 
 # Software/Service
+
 - [copilot](/copilot.md)
-- [nvidia](/nvdia.md)
+- [llama-server](/llama-server.md)
+- [nvidia](/nvdia.md) only if you don't have a llama-server
 - [nginx](/nginx.md)
 - [Let's encrypt](/letsencrypt.md)
 - [redis](/redis.md)
@@ -27,15 +31,18 @@ This repository contains notes on my personal server/workstation/rasbpi/... inst
 - TODO: [kubernetes](./kubernetes.md)
 
 # Other
+
 - [networkmanager](./other/networkmanager.md)
 - [new_zeus](./other/new_zeus.md)
 - [moving_boot](./other/moving_boot.md)
 - [pihole](./pihole.md)
 
 # inspects
+
 - [20241013_ares](./inspects/20241013_ares.md)
 
 # All links in this repository
+
 - [cpu.md](./cpu.md)
 - [crypt.md](./crypt.md)
 - [crypt_fs.md](./crypt_fs.md)
