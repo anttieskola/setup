@@ -1,0 +1,36 @@
+# copy: /etc/systemd/system/llama.service
+
+# install
+# sudo systemctl daemon-reload
+# sudo systemctl enable llama.service
+# sudo systemctl start llama.service
+
+# removal
+# sudo systemctl stop llama.service
+# sudo systemctl disable llama.service
+# remove the service file
+# reload daemon
+
+# full log you can see with
+# journalctl -u llama
+
+[Unit]
+Description=llama
+After=network.target
+
+[Service]
+Type=simple
+Restart=always
+User=antti
+
+Environment="PATH=/home/antti/bin:/usr/local/bin:/usr/bin:/bin"
+Environment="LD_LIBRARY_PATH=/usr/local/cuda/lib64"
+WorkingDirectory=/usr/local/llama
+ExecStart=/home/antti/bin/llama-server
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=llama
+
+[Install]
+WantedBy=multi-user.target
