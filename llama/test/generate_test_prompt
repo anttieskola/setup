@@ -1,0 +1,4 @@
+#!/bin/bash
+# We aim to create for DS max
+rm test_prompt.txt
+for i in {1..269}; do echo "The quick brown fox jumps over the lazy dog. This is a simple test sentence designed to evaluate the context size of a language model. By repeating this text, we can generate a large prompt to see if the model processes the full input or truncates it. The goal is to exceed thirty-three thousand tokens and observe the behavior of the DeepSeek-R1-Distill-Qwen-32B model running on llama-server. This experiment helps us confirm whether the custom context size of 33792 works as expected or if it falls back to the default 32768 limit."; done > test_prompt.txt
