@@ -23,7 +23,7 @@
 - [SonarQube](#sonarqube)
 - [NodeJS](#nodejs)
 - [Rust](#rust)
-- [Python](#Python)
+- [Python](#python)
 - [Bitwarden](#bitwarden)
 - [Microsoft signing key](#microsoft-signing-key)
   - [VSCode](#vscode)
@@ -468,6 +468,42 @@ load-module module-bluetooth-policy auto_switch=2
 ```
 
 - restart pulseaudio & xServer
+
+## Required
+
+```bash
+# non free firmware
+sudo apt install bluetooth bluez bluez-firmware firmware-linux-nonfree pulseaudio-module-bluetooth
+
+# restart
+sudo modprobe -r btusb
+sudo modprobe btusb
+sudo systemctl restart bluetooth
+
+# status
+sudo systemctl status bluetooth
+hciconfig -a
+
+# discovery module
+pactl load-module module-bluetooth-discover
+# check discovery module
+pactl list modules | grep bluetooth
+
+# add headphones in bluetoothctl
+bluetoothctl
+
+# inside bluetoothctl
+remove 2C:41:A1:07:F9:20
+power on
+scan on
+pair 2C:41:A1:07:F9:20
+connect 2C:41:A1:07:F9:20
+trust 2C:41:A1:07:F9:20
+
+# pulseaudio - set high fidelity playback (A2DP sink)
+pactl set-card-profile bluez_card.2C_41_A1_07_F9_20 a2dp_sink
+
+```
 
 # Pulseaudio
 
