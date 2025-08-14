@@ -59,7 +59,7 @@ sudo flatpak update
 ## Sources.list
 
 ```ini
-  GNU nano 7.2                                      /etc/apt/sources.list *                                             # debian (fi-mirror)
+# debian (fi-mirror)
 deb http://www.nic.funet.fi/debian/ trixie main contrib non-free non-free-firmware
 deb-src http://www.nic.funet.fi/debian/ trixie main contrib non-free non-free-firmware
 
