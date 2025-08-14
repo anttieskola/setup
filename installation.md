@@ -59,20 +59,20 @@ sudo flatpak update
 ## Sources.list
 
 ```ini
-# debian (fi-mirror)
-deb http://www.nic.funet.fi/debian/ bookworm main contrib non-free non-free-firmware
-deb-src http://www.nic.funet.fi/debian/ bookworm main contrib non-free non-free-firmware
+  GNU nano 7.2                                      /etc/apt/sources.list *                                             # debian (fi-mirror)
+deb http://www.nic.funet.fi/debian/ trixie main contrib non-free non-free-firmware
+deb-src http://www.nic.funet.fi/debian/ trixie main contrib non-free non-free-firmware
 
 # debian
-deb http://deb.debian.org/debian/ bookworm-updates main non-free contrib non-free-firmware
-deb-src http://deb.debian.org/debian/ bookworm-updates main non-free contrib non-free-firmware
+deb http://deb.debian.org/debian/ trixie-updates main non-free contrib non-free-firmware
+deb-src http://deb.debian.org/debian/ trixie-updates main non-free contrib non-free-firmware
 
 # backports
-deb http://deb.debian.org/debian bookworm-backports main contrib non-free non-free-firmware
-deb-src http://deb.debian.org/debian/ bookworm-backports main contrib non-free non-free-firmware
+# deb http://deb.debian.org/debian trixie-backports main contrib non-free non-free-firmware
+# deb-src http://deb.debian.org/debian/ trixie-backports main contrib non-free non-free-firmware
 
 # security
-deb http://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware
+deb http://security.debian.org/debian-security trixie-security main contrib non-free non-free-firmware
 deb-src http://security.debian.org/debian-security stable-security main
 ```
 
