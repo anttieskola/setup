@@ -15,6 +15,7 @@ GRUB_CMDLINE_LINUX_DEFAULT="modprobe.blacklist=nouveau net.ifnames=0 bios.devnam
 ## Debian 13 - issues
 
 - Have not succeeded to use nvidia driver with kernel, bookworm kernel still works
+- 13.0.0 driver worked with 6.12.41+deb13-amd64 kernel and 4060, not sure why 5060 failed...
 
 ## GTX 5060 issues
 
