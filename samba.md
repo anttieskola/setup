@@ -1,8 +1,11 @@
 # Samba setup
 
 Installation
+
 ```bash
 sudo apt-get install samba
+sudo ufw allow Samba
+sudo ufw reload
 ```
 
 Configuration is found in `/etc/samba/smb.conf`
@@ -13,8 +16,8 @@ configuration for errors.
 Only thing to note is that each user has separate password for samba.
 Just remember to set the separate password using the tool `smbpasswd` for the user you want to use to access the shares.
 
-
 Adding user and enabling it
+
 ```bash
 sudo smbpasswd -a antti
 ...
@@ -27,40 +30,28 @@ This is now working somewhat, not sure why when I add `bind interfaces only` it 
 Not sure does subnetwork defition work in this options to do what I wanted which is restrict
 allowed hosts into the range 192.168.1.1 - 62, but thats the purpose of it.
 
-```
-[global]
-server string = zeus
+```ini
+[global]                                     security = user
+valid users = antti
+server string = storage
+map to guest = Bad User
 
-# bind to partial subnet
-# 192.168.1.1-.. .62
-interfaces = 192.168.1.20/26
+# allow access from specific ip's
+interfaces = 192.168.1.253 192.168.1.252 192.168.1.251 192.168.1.250 192.168.1.249
 
 log file = /var/log/samba/log.%m
 max log size = 1000
 logging = file
 panic action = /usr/share/samba/panic-action %d
 
-server role = standalone server
-obey pam restrictions = yes
-map to guest = bad user
-
-valid users = antti
-
-[Files]
-path = /mnt/files
-read only = no
-
-[Media]
-path = /mnt/media
-read only = no
-
-[Projects]
-path = /home/projects
+[ares0]
+path = /mnt/ares0
 read only = no
 
 ```
 
 Restarting service
+
 ```bash
 sudo systemctl restart smbd
 ```

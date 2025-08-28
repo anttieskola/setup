@@ -220,7 +220,7 @@ source .bash_tokens
 - use isenkram to install any missing firmware
 
 ```bash
-sudo apt install isenkram
+sudo apt install isenkram-cli
 sudo isenkram-autoinstall-firmware
 ```
 
