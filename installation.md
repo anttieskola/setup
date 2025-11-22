@@ -51,6 +51,8 @@ sudo apt update
 sudo apt full-upgrade
 
 # Flatpak
+sudo apt install flatpak
+# also need to install flatpak backend so it can be used with discover
 sudo flatpak update
 
 # Nvidia - check cuda installer for latest driver
@@ -94,6 +96,8 @@ deb-src http://security.debian.org/debian-security stable-security main
   - /home: EXT4 (general purpose)
 
 ## Partitioning used
+
+Note each system has their own requirements, adjust accordingly.
 
 - 512MB EFI (bootable)
 - 512MB EXT2 /boot
@@ -155,7 +159,7 @@ sudo systemctl reboot
 # Basic stuff
 
 ```bash
-sudo apt install git git-lfs make gcc tcl libssl-dev libsystemd-dev libc6 libgcc-s1 libstdc++6 zlib1g ca-certificates apt-transport-https libfreeimage3 libfreeimage-dev curl cpulimit neofetch smartmontools
+sudo apt install git git-lfs make gcc tcl libssl-dev libsystemd-dev libc6 libgcc-s1 libstdc++6 zlib1g ca-certificates apt-transport-https libfreeimage3 libfreeimage-dev curl cpulimit smartmontools
 ```
 
 # Kernel stuff
@@ -261,73 +265,11 @@ sudo apt install gnome-keyring libqt5keychain1
 - Added path to .bash_aliases
 
 # JAVA
-
-Purged APT packages
-'''text
-default-jdk/stable,now 2:1.17-74 amd64 [installed]
-default-jdk-headless/stable,now 2:1.17-74 amd64 [installed,automatic]
-default-jre/stable,now 2:1.17-74 amd64 [installed,automatic]
-default-jre-headless/stable,now 2:1.17-74 amd64 [installed,automatic]
-openjdk-17-jdk/stable-security,now 17.0.14+7-1~deb12u1 amd64 [installed,automatic]
-openjdk-17-jdk-headless/stable-security,now 17.0.14+7-1~deb12u1 amd64 [installed,automatic]
-openjdk-17-jre/stable-security,now 17.0.14+7-1~deb12u1 amd64 [installed,automatic]
-openjdk-17-jre-headless/stable-security,now 17.0.14+7-1~deb12u1 amd64 [installed,automatic]
-
-```
-
-- Purge
-
-```bash
-sudo apt purge default-jdk default-jdk-headless default-jre default-jre-headless openjdk-17-jdk openjdk-17-jdk-headless openjdk-17-jre openjdk-17-jre-headless
-# shame on pdftk
-# default-jdk* default-jdk-headless* default-jre* default-jre-headless* openjdk-17-jdk*
-# openjdk-17-jdk-headless* openjdk-17-jre* openjdk-17-jre-headless* pdftk* pdftk-java
-sudo apt autoremove
-# bye bye for many packages, not sure will this break something...
-```
-
-- Get latest version from [adoptium](https://adoptium.net/)
-- Just first extract package to Downloads, this will create name like 'jdk-21.0.6+7'
-- Then move the folder as sudo to /usr/local/
-- Then create symlink to the folder named /usr/local/java
-
-```bash
-# Move and create/update symlink
-sudo mv ~/Downloads/jdk-21.0.6+7 /usr/local/
-sudo ln -s /usr/local/jdk-21.0.6+7 /usr/local/java
-```
-
-- Then modify .bash_aliases
-
-```bash
-# Add/modify JAVA_HOME and PATH
-export JAVA_HOME=/usr/local/java
-export PATH=$PATH:$JAVA_HOME/bin
-```
+Moved to [java.md](./java.md)
 
 # SonarQube
+Moved to [sonarqube.md](./sonarqube.md)
 
-- Download community version from [sonarqube](https://www.sonarsource.com/)
-- Just first extract package to Downloads, this will create name like 'sonarqube-25.2.0.102705'
-- Then move the folder as sudo to /usr/local/
-- Then create symlink to the folder named /usr/local/sonarqube
-
-```bash
-# Move and create/update symlink
-sudo mv ~/Downloads/sonarqube-25.2.0.102705 /usr/local/
-sudo ln -s /usr/local/sonarqube-25.2.0.102705 /usr/local/sonarqube
-```
-
-- Then modify .bash_aliases
-
-```bash
-# Add/modify SONAR_HOME and PATH
-export SONAR_HOME=/usr/local/sonarqube
-export PATH=$PATH:$SONAR_HOME/bin/linux-x86-64
-# Create admin token (for all access)
-# Add/modify your .bash_tokens (all secret stuff goes there)
-export SONAR_TOKEN=[your admin token]
-```
 
 # NodeJS
 
@@ -401,6 +343,9 @@ sudo apt install vlc
 You have to manually update every about 3..6 months
 Download: <https://bitwarden.com/download/>
 
+Switch to use flatpak release so it will be much safer to use.
+
+## Old style
 ```bash
 sudo dpkg -i Bitwarden-XXX-amd64.deb
 ```

@@ -1,4 +1,6 @@
-# Upgrade Postgresql
+# Installation from postgresql.org repository
+
+## Upgrade Postgresql
 
 ```bash
 # Dump all databases
@@ -16,19 +18,40 @@ sudo -u postgres psql < full_backup_17.sql
 # /var/lib/postgresql/xx
 ```
 
-## Installation
+### Installation from debian repository
+
+Easiest way to install postgresql and get security updates
+of course it is not the latest version, but will suffice.
+
+But as I have been using latest version I can't use this.
+
+```bash
+sudo apt install postgresql
+```
+
+#### Cleaning 17
+```bash
+sudo apt remove libcommon-sense-perl libjson-xs-perl postgresql-17  postgresql-common-dev libio-pty-perl libpq5 postgresql-client-17 sysstat libipc-run-perl libtypes-serialiser-perl postgresql-client-common libjson-perl libxslt1.1 postgresql-common
+```
+
+### Installation from postgresql.org repository
 
 [Installation](https://www.postgresql.org/download/linux/debian/)
 
 ```bash
-sudo sh -c 'echo "deb https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
-
-wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-
-sudo apt-get update
-
-sudo apt-get -y install postgresql
+sudo apt install curl ca-certificates
+sudo install -d /usr/share/postgresql-common/pgdg
+sudo curl -o /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc
+. /etc/os-release
+sudo sh -c "echo 'deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc] https://apt.postgresql.org/pub/repos/apt $VERSION_CODENAME-pgdg main' > /etc/apt/sources.list.d/pgdg.list"
+sudo apt update
 ```
+
+#### Client and development packages
+```bash
+sudo apt install postgresql-18 postgresql-18 postgresql-client-18 libpq-dev postgresql-server-dev-18
+```
+
 
 Current postgresql 17 configure file location `/etc/postgresql/17/main/`
 These default settings (not sure did I add them or not) in `pg_hba.conf` seems to allow local system users to login without password (peer authentication).
@@ -43,7 +66,7 @@ host    sonarqube   sonaruser   ::1/128         md5
 local   all             all                                     peer
 ```
 
-Check the common configuration file '/etc/postgresql/17/main/postgresql.conf'
+Check the common configuration file '/etc/postgresql/1/main/postgresql.conf'
 
 ```ini
 # Connection settings should look like

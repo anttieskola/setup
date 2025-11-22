@@ -1,6 +1,31 @@
 # SonarQube downloading
 
-1. [Download community edition](https://www.sonarsource.com/products/sonarqube/downloads/)
+- Download community version from [sonarqube](https://www.sonarsource.com/)
+- Just first extract package to Downloads, this will create name like 'sonarqube-25.11.0.114957'
+- Then move the folder as sudo to /usr/local/
+- Then create symlink to the folder named /usr/local/sonarqube
+
+**Important note**
+I was earlier using version 21.x.x, 25.x.x version just kept crashing trying to update database structure.
+I have the backup saved but don't think it is gonna work out as there was no
+special instructions on migrating, it was suppose to work out of the box but did not.
+
+```bash
+# Move and create/update symlink
+sudo mv ~/Downloads/sonarqube-25.11.0.114957 /usr/local/
+sudo ln -s /usr/local/sonarqube-25.11.0.114957 /usr/local/sonarqube
+```
+
+- Then modify .bash_aliases
+
+```bash
+# Add/modify SONAR_HOME and PATH
+export SONAR_HOME=/usr/local/sonarqube
+export PATH=$PATH:$SONAR_HOME/bin/linux-x86-64
+# Create admin token (for all access)
+# Add/modify your .bash_tokens (all secret stuff goes there)
+export SONAR_TOKEN=[your admin token]
+```
 
 - Firewall
 
@@ -10,6 +35,10 @@ sudo ufw allow 9000/tcp
 sudo ufw allow 9001/tcp
 sudo ufw reload
 ```
+
+## Java requirement
+- Can't use latest java 25, use java 21 or 17
+  => Use java-12 that comes with Debian
 
 ## Setup
 
@@ -27,7 +56,7 @@ export PATH=$PATH:$SONAR_HOME/bin/linux-x86-64
 
 ### Configuration database
 
-Current postgresql 17 configure file location `/etc/postgresql/17/main/`
+Current postgresql 18 configure file location `/etc/postgresql/18/main/`
 These default settings (not sure did I add them or not) in `pg_hba.conf` seems to allow local system users to login without password (peer authentication).
 
 ```ini
@@ -121,10 +150,6 @@ sudo nano /etc/systemd/system/sonarqube.service
 # journalctl -u sonarqube.service
 
 [Unit]
-Description=sonarqube.service
-After=network.target
-
-[Unit]
 Description=SonarQube Service
 After=network.target
 
@@ -138,9 +163,9 @@ User=antti
 Group=antti
 
 # Environment setup for Sonar
-Environment="SONAR_JAVA_PATH=/usr/local/java/bin/java"
-Environment="SONAR_HOME=/usr/local/bin/sonarqube"
-Environment="PATH=/usr/local/java/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sonarqube/bin/linux-x86-64"
+Environment="SONAR_JAVA_PATH=/usr/lib/jvm/java-21-openjdk-amd64/bin/java"
+Environment="SONAR_HOME=/usr/local/sonarqube"
+Environment="PATH=/usr/lib/jvm/java-21-openjdk-amd64/bin:/usr/local/sonarqube/bin/linux-x86-64:/usr/local/bin:/usr/bin:/bin"
 
 TimeoutStartSec=300
 TimeoutStopSec=120
