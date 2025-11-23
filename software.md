@@ -48,3 +48,9 @@ sudo flatpak install flathub com.prusa3d.PrusaSlicer -y
 [Homepage](https://www.openshot.org/)
 Use only **AppImage**, never install APT/Flatpak package, as it is so old version.
 - Download AppImage from [OpenShot](https://www.openshot.org/download/)
+
+## Handbrake - Video converter
+[Homepage](https://handbrake.fr/)
+```bash
+flatpak install flathub fr.handbrake.ghb
+```
