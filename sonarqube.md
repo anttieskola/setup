@@ -38,7 +38,7 @@ sudo ufw reload
 
 ## Java requirement
 - Can't use latest java 25, use java 21 or 17
-  => Use java-12 that comes with Debian
+  => Use [java-12 that comes with Debian](./java.md)
 
 ## Setup
 

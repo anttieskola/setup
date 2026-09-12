@@ -32,7 +32,7 @@ git clone <https://github.com/ggml-org/llama.cpp>
 cd llama.cpp
 
 # confgure for CUDA and half precision
-cmake -B build -DGGML_CUDA=ON -DGGML_CUDA_F16=ON
+cmake -B build -DGGML_CUDA=ON -DGGML_CUDA_F16=ON -DLLAMA_CUBLAS=ON
 cmake --build build --config Release
 ```
 
