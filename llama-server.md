@@ -23,7 +23,7 @@ sudo ./cuda_12.6.3_560.35.05_linux.run --override --silent --driver --toolkit
 ```
 
 ## Build
-
+ 
 ```bash
 
 # clone
@@ -32,7 +32,7 @@ git clone <https://github.com/ggml-org/llama.cpp>
 cd llama.cpp
 
 # confgure for CUDA and half precision
-cmake -B build -DGGML_CUDA=ON -DGGML_CUDA_F16=ON -DLLAMA_CUBLAS=ON
+cmake -B build -DGGML_CUDA=ON -DGGML_CUDA_F16=ON
 cmake --build build --config Release
 ```
 

@@ -1,0 +1,21 @@
+{
+  "providers": {
+    "ollama": {
+      "baseUrl": "http://artemis:8080/v1",
+      "api": "openai-completions",
+      "apiKey": "not-required-but-must-be-defined",
+      "models": [
+        {
+          "id": "Qwen3.8-27B-UD-IQ3_XXS",
+          "name": "Qwen 3.8 27B",
+          "reasoning": true,
+          "input": [
+            "text"
+          ],
+          "contextWindow": 262144,
+          "maxTokens": 262144
+        }
+      ]
+    }
+  }
+}
