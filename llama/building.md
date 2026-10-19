@@ -12,8 +12,17 @@ This is for my rig 2 x 4060TI 16G.
 
 ```bash
 # Configure
-cmake -B build -DGGML_CUDA=ON -DGGML_CUDA_F16=ON -DCMAKE_CUDA_ARCHITECTURES=89 -DGGML_CCACHE=OFF
+cmake -B build -DGGML_CUDA=ON  -DGGML_CUDA_FA_QUANTS="all" -DCMAKE_CUDA_ARCHITECTURES=89
 
+# Build
+cmake --build build -j12
+```
+
+This is for my older rig.
+
+```bash
+# Configure
+cmake -B build -DGGML_CUDA=ON  -DGGML_CUDA_FA_QUANTS="all" -DCMAKE_CUDA_ARCHITECTURES=86
 
 # Build
 cmake --build build -j12
